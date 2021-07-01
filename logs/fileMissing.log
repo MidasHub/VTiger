@@ -1,0 +1,99 @@
+Traced on 2021-07-01 10:30:13
+FileAccessForInclusion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForInclusion::388<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::checkFileAccessForInclusion::65<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::includeOnce::191<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::vimport::15<br>
+E:\laragon\www\vtigercrm\index.php::include_once::17<br>
+Traced on 2021-07-01 10:30:18
+FileAccessForInclusion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForInclusion::388<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::checkFileAccessForInclusion::65<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::includeOnce::191<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::vimport::15<br>
+E:\laragon\www\vtigercrm\index.php::include_once::17<br>
+Traced on 2021-07-01 10:30:19
+FileAccessForInclusion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForInclusion::388<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::checkFileAccessForInclusion::65<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::includeOnce::191<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::vimport::15<br>
+E:\laragon\www\vtigercrm\index.php::include_once::17<br>
+Traced on 2021-07-01 10:30:19
+FileAccessForInclusion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForInclusion::388<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::checkFileAccessForInclusion::65<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::includeOnce::191<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::vimport::15<br>
+E:\laragon\www\vtigercrm\index.php::include_once::17<br>
+Traced on 2021-07-01 10:30:49
+FileAccessForInclusion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForInclusion::388<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::checkFileAccessForInclusion::65<br>
+E:\laragon\www\vtigercrm\includes\Loader.php::includeOnce::191<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::vimport::15<br>
+E:\laragon\www\vtigercrm\index.php::include_once::17<br>
+Traced on 2021-07-01 10:41:46
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\actions\Basic.php::checkFileAccessForDeletion::60<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::importUserModuleStep3::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\actions\Basic.php::invokeExposedMethod::23<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>
+Traced on 2021-07-01 10:46:29
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::checkFileAccessForDeletion::176<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::importUserModuleStep2::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::invokeExposedMethod::24<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>
+Traced on 2021-07-01 10:47:53
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::checkFileAccessForDeletion::176<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::importUserModuleStep2::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::invokeExposedMethod::24<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>
+Traced on 2021-07-01 10:53:58
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::checkFileAccessForDeletion::176<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::importUserModuleStep2::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::invokeExposedMethod::24<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>
+Traced on 2021-07-01 11:36:05
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::checkFileAccessForDeletion::176<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::importUserModuleStep2::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::invokeExposedMethod::24<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>
+Traced on 2021-07-01 11:43:26
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::checkFileAccessForDeletion::176<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::importUserModuleStep2::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\views\ModuleImport.php::invokeExposedMethod::24<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>
+Traced on 2021-07-01 11:47:26
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\actions\Basic.php::checkFileAccessForDeletion::91<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::updateUserModuleStep3::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\actions\Basic.php::invokeExposedMethod::23<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>
+Traced on 2021-07-01 11:54:16
+FileAccessForDeletion - 
+E:\laragon\www\vtigercrm\include\utils\CommonUtils.php::checkFileAccessForDeletion::393<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\actions\Basic.php::checkFileAccessForDeletion::60<br>
+E:\laragon\www\vtigercrm\includes\runtime\Controller.php::importUserModuleStep3::64<br>
+E:\laragon\www\vtigercrm\modules\Settings\ModuleManager\actions\Basic.php::invokeExposedMethod::23<br>
+E:\laragon\www\vtigercrm\includes\main\WebUI.php::process::215<br>
+E:\laragon\www\vtigercrm\index.php::process::20<br>

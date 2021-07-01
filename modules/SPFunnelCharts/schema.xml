@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_sp_sales_funnel</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_sp_sales_funnel` (
+          `id` INT(19) NOT NULL,
+          `name` varchar(100) NOT NULL,
+          `description` varchar(255) DEFAULT '',
+          `owner` INT(11) NOT NULL,
+          PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_sp_sales_funnel_stages</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_sp_sales_funnel_stages`(
+            `record_id` INT(19) NOT NULL,
+            `report_id` INT(19) NOT NULL,
+            `plot_field` VARCHAR(255) NOT NULL DEFAULT 'count',
+            `sequence` INT(10)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>

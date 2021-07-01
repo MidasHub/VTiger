@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_sp_indicators</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_sp_indicators` (
+          `id` INT(19) NOT NULL,
+          `name` varchar(100) NOT NULL,
+          `description` varchar(255) DEFAULT '',
+          `owner` INT(11) NOT NULL,
+          PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_sp_indicators_stages</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_sp_indicators_stages`(
+            `record_id` INT(19) NOT NULL,
+            `name` VARCHAR(255) NOT NULL,
+            `usage_unit` VARCHAR(255) NOT NULL,
+            `round` INT(19) DEFAULT NULL,
+            `description` TEXT DEFAULT NULL,
+            `calculate_expression` VARCHAR(255) NOT NULL,
+            `sequence` INT(10)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_sp_indicators_calculate_members</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_sp_indicators_calculate_members`(
+            `record_id` INT(19) NOT NULL,
+            `members` TEXT NOT NULL,
+            PRIMARY KEY (`record_id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>
