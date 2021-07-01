@@ -31,7 +31,7 @@ $CALENDAR_DISPLAY = 'true';
 $USE_RTE = 'true';
 
 // helpdesk support email id and support name (Example: 'support@vtiger.com' and 'vtiger support')
-$HELPDESK_SUPPORT_EMAIL_ID = 'nc.1102@gmail.com';
+$HELPDESK_SUPPORT_EMAIL_ID = 'example@example.com';
 $HELPDESK_SUPPORT_NAME = 'Support';
 $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
 
@@ -47,7 +47,7 @@ $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
 $dbconfig['db_server'] = 'localhost';
 $dbconfig['db_port'] = ':3306';
 $dbconfig['db_username'] = 'root';
-$dbconfig['db_password'] = 'Bietlamgi21@@';
+$dbconfig['db_password'] = '123456';
 $dbconfig['db_name'] = 'vtigercrmdb';
 $dbconfig['db_type'] = 'mysqli';
 $dbconfig['db_status'] = 'true';
@@ -79,7 +79,7 @@ $dbconfigoption['ssl'] = false;
 
 $host_name = $dbconfig['db_hostname'];
 
-$site_URL = 'http://localhost/';
+$site_URL = 'http://'.$dbconfig['db_hostname'].'/';
 
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
