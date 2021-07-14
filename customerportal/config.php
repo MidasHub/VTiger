@@ -29,13 +29,13 @@ class Portal_Config_Data {
 	protected static $data = array(
 		//CRM URL without trialing/
 		//Example: http://yourdomain.com/crm
-		'crm.url' => 'https://vtiger.kiotthe.app/',
+		'crm.url' => 'http://localhost/vtigercrm',
 
 		//Portal URL without trialing/
 		//Example: http://yourdomain.com/portal
-		'portal.url' => 'https://vtiger.kiotthe.app/customerportal',
+		'portal.url' => 'http://localhost/vtigercrm/customerportal',
 
-		'crm.version' => '7.2.0', // Framework version for API
+		'crm.version' => '7.4.0RC', // Framework version for API
 		'language' => 'en_us', // Default Language for API. Note : Changing the language here will not change the default/login language for Portal user.
 		'layout' => 'default',
 	);

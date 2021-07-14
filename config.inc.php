@@ -23,7 +23,7 @@ include('vtigerversion.php');
 
 // more than 8MB memory needed for graphics
 // memory limit default value = 64M
-ini_set('memory_limit','1028M');
+ini_set('memory_limit','512M');
 
 // show or hide calendar, world clock, calculator, chat and CKEditor 
 // Do NOT remove the quotes if you set these to false! 
@@ -31,8 +31,8 @@ $CALENDAR_DISPLAY = 'true';
 $USE_RTE = 'true';
 
 // helpdesk support email id and support name (Example: 'support@vtiger.com' and 'vtiger support')
-$HELPDESK_SUPPORT_EMAIL_ID = 'example@example.com';
-$HELPDESK_SUPPORT_NAME = 'Support';
+$HELPDESK_SUPPORT_EMAIL_ID = 'anh.nh@outlook.com';
+$HELPDESK_SUPPORT_NAME = 'Midas Team';
 $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
 
 /* database configuration
@@ -44,11 +44,12 @@ $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
       db_name
 */
 
-$dbconfig['db_server'] = 'localhost';
+$dbconfig['db_server'] = '127.0.0.1';
 $dbconfig['db_port'] = ':3306';
 $dbconfig['db_username'] = 'root';
-$dbconfig['db_password'] = '123456';
-$dbconfig['db_name'] = 'vtigercrmdb';
+$dbconfig['db_password'] = 'Ifns$!029riW';
+//$dbconfig['db_password'] = 'Anhnh7383@';
+$dbconfig['db_name'] = 'midasvtiger';
 $dbconfig['db_type'] = 'mysqli';
 $dbconfig['db_status'] = 'true';
 
@@ -79,12 +80,12 @@ $dbconfigoption['ssl'] = false;
 
 $host_name = $dbconfig['db_hostname'];
 
-$site_URL = 'http://'.$dbconfig['db_hostname'].'/';
+$site_URL = 'http://localhost/vtigercrm/';
 
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
 // root directory path
-$root_directory = '';
+$root_directory = '/Users/anhjean/Documents/www/vtigercrm/';
 
 // cache direcory path
 $cache_dir = 'cache/';
@@ -156,7 +157,7 @@ $display_empty_home_blocks = false;
 $disable_stats_tracking = false;
 
 // Generating Unique Application Key
-$application_unique_key = 'dc66d1a8b837fd5771a6ce148834c0a6';
+$application_unique_key = '2415a3c4db6736987bb02e294d34abb7';
 
 // trim descriptions, titles in listviews to this value
 $listview_max_textlength = '40';

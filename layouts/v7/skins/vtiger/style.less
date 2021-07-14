@@ -1656,7 +1656,8 @@ ul.unstyled{
 .listViewEntries .relatedListEntryValues .value{
     vertical-align: middle;
 	width: 80%;
-	display: inline-block;
+    display: inline-block;
+    max-width: 300px;
 }
 
 .floatThead-table{
@@ -2068,7 +2069,6 @@ strong, b, th{
 
 .referencefield-wrapper{
     display: table-cell;
-    width: 80%;
     max-width: 325px;
 }
 //removed styles for reference field 
@@ -2637,8 +2637,7 @@ strong, b, th{
 
 .fieldBlockContainer .inputElement{
     height : 30px;
-    width: 100%;
-    max-width: 325px;
+    width: 200px;
 }
 //editview input-group styles
 .editViewContents {
@@ -2677,6 +2676,12 @@ strong, b, th{
 .input-group.inputElement .input-group-addon{
     border:none;
     border-left:1px solid #ddd;  
+}
+
+.input-group.inputElement .input-group-addon-right{
+    border:none;
+    border-left:0px;
+    border-right:1px solid #ddd;
 }
 
 .fieldBlockContainer textarea.inputElement{
@@ -6292,6 +6297,9 @@ hr{
 .width75per{
     width: 75%;
 }
+.width100per{
+    width: 100% !important;
+}
 #_mbox_pwd{
     padding: 3px 8px;
 }
@@ -6889,14 +6897,13 @@ div.tooltip-inner{
     border-left:0;
 }
 .editViewContents .fieldValue .referencefield-wrapper {
-    width: 100%;
     display: inline-block;
 }
 .fieldValueWidth80{
     width:80% !important;
 }
 .input-group-addon{
-    line-height: 1.5;
+    line-height: inherit;
     border-width: thin;
 }
 .input-group{
@@ -6914,7 +6921,6 @@ div.tooltip-inner{
     }
 .summaryViewEntries .inputElement.form-control,
 .detailview-table .inputElement.form-control{
-    width:80%;
     max-width: 300px;
 }
 .detailview-table input[type="checkbox"]{ //TN-#34172
@@ -8665,4 +8671,29 @@ body .fc {
         border-width: thin;
         padding: 30px;
     }
+}
+
+#vt-mask{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-height: 100%;
+    min-width: 100%;
+    height: auto;
+    width: auto;
+    opacity: 0;
+    z-index: 10001;
+    background-color: #fff;
+}
+.fieldBlockContainer .inputElement.textAreaElement {
+    max-width:none;
+    width: 100%;
+}
+
+.detailview-table textarea.inputElement.form-control {
+    max-width:none;
+    width: 90%;
 }

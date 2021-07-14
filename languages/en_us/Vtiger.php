@@ -182,6 +182,8 @@ $languageStrings = array(
 	'LBL_NO_COMMENTS' => 'No comments',
 	'LBL_REPLIES' => 'replies',
 	'LBL_REPLY_ALL' => 'Reply all',
+	'LBL_INTERNAL_COMMENT_TOOTLTIP' => 'Customers cannot see this comment',
+	'LBL_EXTERNAL_COMMENT_TOOTLTIP' => 'Customers might see this comment via notifications or customer portal',
 
 	//Translation for all modules
 	'Accounts' => 'Organizations',
@@ -1390,6 +1392,7 @@ $languageStrings = array(
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_RELATED_MODULES_PERMISSION_DENIED' => 'Related modules permission is denied',
 	'LBL_RECORD_PERMISSION_DENIED' => 'Record permissions denied',
+	'LBL_MASS_SELECT' => 'Mass Select',
 );
 
 $jsLanguageStrings = array(
@@ -1942,4 +1945,5 @@ $jsLanguageStrings = array(
         'JS_RELATED_ACCOUNT_IS_NOT_AVAILABLE' => 'Related Organization record is not available',
         'JS_RELATED_CONTACT_IS_NOT_AVAILABLE' => 'Related Contact record is not available',
         'JS_REPEAT_DATE_SHOULD_BE_GREATER_THAN_START_DATE' => 'Repeat date should be greater than or equal to Start Date',
+        'JS_PASSWORD_NOT_STRONG' => 'To keep your data safe, we suggest that you use a strong password &lt;br&gt; &lt;ul&gt; &lt;li&gt;Password should be at least 8 characters long &lt;/li&gt; &lt;li&gt;Include at least one number &lt;/li&gt; &lt;li&gt;Include at least one lowercase alphabet &lt;/li&gt; &lt;li&gt;Include at least one uppercase alphabet &lt;/li&gt; &lt;li&gt;Include at least one special character in the password &lt;/li&gt; &lt;/ul&gt;',
 );

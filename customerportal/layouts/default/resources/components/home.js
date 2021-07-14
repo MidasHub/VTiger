@@ -173,13 +173,13 @@ function Home_Component($scope, $api, $webapp, $modal, sharedModalService, $tran
 
 	$scope.loadRecentRecord = function (module, id) {
 		var availableModules = $scope.$parent.modules;
-		if (availableModules['HelpDesk'] !== undefined && (availableModules['HelpDesk'].label === module) || availableModules['HelpDesk'].uiLabel === module) {
+		if (availableModules['HelpDesk'] !== undefined && (availableModules['HelpDesk'].label === module || availableModules['HelpDesk'].uiLabel === module)) {
 			window.location.href = "index.php?module=HelpDesk&view=Detail&id="+id;
 		}
-		if (availableModules['Documents'] !== undefined && (availableModules['Documents'].label === module) || availableModules['Documents'].uiLabel === module) {
+		if (availableModules['Documents'] !== undefined && (availableModules['Documents'].label === module || availableModules['Documents'].uiLabel === module)) {
 			window.location.href = "index.php?module=Documents&view=Detail&id="+id;
 		}
-		if (availableModules['Faq'] !== undefined && (availableModules['Faq'].label === module) || availableModules['Faq'].uiLabel === module) {
+		if (availableModules['Faq'] !== undefined && (availableModules['Faq'].label === module || availableModules['Faq'].uiLabel === module)) {
 			window.location.href = "index.php?module=Faq&record="+id;
 		}
 	}

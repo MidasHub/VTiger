@@ -11,7 +11,7 @@
     <div ng-class="{'col-lg-5 col-md-5 col-sm-12 col-xs-12 leftEditContent':splitContentView, 'col-lg-12 col-md-12 col-sm-12 col-xs-12 leftEditContent nosplit':!splitContentView}">
         <div class="container-fluid">
             <div class="row">
-                <div class="row detailRow" ng-hide="fieldname=='id' || fieldname=='identifierName' || fieldname=='{{header}}' || fieldname=='documentExists' || fieldname=='referenceFields'"  ng-repeat="(fieldname, value) in record">
+                <div class="row detailRow" ng-hide="fieldname=='id' || fieldname=='' || fieldname=='identifierName' || fieldname=='{{header}}' || fieldname=='documentExists' || fieldname=='referenceFields'"  ng-repeat="(fieldname, value) in record">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <label class="fieldLabel" translate="{{fieldname}}"> {{fieldname}} </label>
                     </div>
