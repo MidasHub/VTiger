@@ -1,0 +1,137 @@
+<?php
+/* ********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * You may not use this file except in compliance with the License
+ * The Initial Developer of the Original Code is VTExperts.com
+ * Portions created by VTExperts.com. are Copyright(C) VTExperts.com.
+ * All Rights Reserved.
+ * ****************************************************************************** */
+require_once("includes/runtime/BaseModel.php");
+require_once("modules/Vtiger/models/Record.php");
+require_once("modules/Vtiger/models/Field.php");
+require_once("modules/Users/models/Record.php");
+require_once("includes/runtime/Globals.php");
+require_once("include/utils/utils.php");
+require_once("includes/runtime/LanguageHandler.php");
+require_once("includes/Loader.php");
+require_once("modules/VTERoundRobin/models/VTELicense.php");
+require_once('modules/com_vtiger_workflow/VTEntityCache.inc');
+require_once('modules/com_vtiger_workflow/VTWorkflowUtils.php');
+
+$adb=PearDatabase::getInstance();
+
+$util = new VTWorkflowUtils();
+$admin = $util->adminUser();
+
+$vTELicense = new VTERoundRobin_VTELicense_Model('VTERoundRobin');
+if ($vTELicense->validate()) {
+   $sql = "SELECT * FROM `vte_roundrobin` WHERE rr_status = ?;";
+    $re = $adb->pquery($sql,array('Active'));
+    if($adb->num_rows($re) > 0){
+        while($row = $adb->fetchByAssoc($re)){
+            $roundrobinid = $row['roundrobinid'];
+            $rr_module = $row['rr_module'];
+            $rr_name = $row['rr_name'];
+            $rr_status_field = $row['rr_status_field'];
+            $rr_unassigned_status = $row['rr_unassigned_status'];
+            $rr_assigned_status = $row['rr_assigned_status'];
+            $rr_online_users_only = $row['rr_online_users_only'];
+            $rr_assign_preferred_user = $row['rr_assign_preferred_user'];
+            $rr_assigment_type = $row['rr_assigment_type'];
+            $rr_members = $row['rr_members'];
+            $sql_get_assignToFied = "SELECT fieldname FROM `vtiger_field` WHERE columnname = 'smownerid' AND tabid = (SELECT tabid from vtiger_tab where name = ?);";
+            $results_get_assignToFied= $adb->pquery($sql_get_assignToFied,array($rr_module));
+            $assignToFied = $adb->query_result($results_get_assignToFied, 0, 'fieldname');
+            if($rr_assigment_type == 'standard'){
+                $sql_get_user_in_roundrobin_assigments = "SELECT
+                    vte_roundrobin_assigments.rr_assigned_user,
+                    MAX(vte_roundrobin_assigments.rr_assigned_user_time) as rr_assigned_user_time,
+                    vtiger_users.deleted
+                FROM
+                    `vte_roundrobin_assigments`
+                INNER JOIN vtiger_users ON vtiger_users.id = vte_roundrobin_assigments.rr_assigned_user
+                WHERE
+                    roundrobinid = $roundrobinid AND vtiger_users.deleted = 0 AND vte_roundrobin_assigments.rr_assigned_user > 0 ";
+                if($rr_online_users_only == 1){
+                    $sql_get_user_in_roundrobin_assigments .=" AND vtiger_users.cf_users_round_robin_status = 1 ";
+                }
+                $sql_get_user_in_roundrobin_assigments .=" AND vte_roundrobin_assigments.rr_assigned_user IN ($rr_members)";
+                $sql_get_user_in_roundrobin_assigments .=" GROUP BY vte_roundrobin_assigments.rr_assigned_user
+                ORDER BY rr_assigned_user_time ASC, rr_assigned_user ASC";
+                $re_get_user_in_roundrobin_assigments = $adb->pquery($sql_get_user_in_roundrobin_assigments,array());
+                $users_arr = array();
+                if($adb->num_rows($re_get_user_in_roundrobin_assigments) > 0){
+                    while($row_user_in_roundrobin_assigments = $adb->fetchByAssoc($re_get_user_in_roundrobin_assigments)){
+                        $users_arr[] = $row_user_in_roundrobin_assigments['rr_assigned_user'];
+                    }
+                }
+                // get module's record have status_field = unassigned_status
+                $moduleListViewModel = Vtiger_ListView_Model::getInstance($rr_module,'All');
+                $queryGenerator = $moduleListViewModel->get('query_generator');
+                if(!empty($rr_unassigned_status)){
+                    $queryGenerator->addCondition($rr_status_field, $rr_unassigned_status, 'e');
+                }
+                $query = $queryGenerator->getQuery();
+                $query = str_replace('SELECT','SELECT vtiger_crmentity.crmid as record_id,',$query);
+                $result = $adb->pquery($query,array());
+                if($adb->num_rows($result) > 0 && !empty($users_arr)){
+                    $key = 0;
+                    while($row = $adb->fetchByAssoc($result)){
+                        $record_id = $row['record_id'];
+                        $userId = $users_arr[$key];
+
+                        if($rr_module == 'HelpDesk' && $rr_assign_preferred_user == 1){
+                            $sql_get_ticket_user = "SELECT
+                                    vtiger_crmentity.smownerid as tk_assign_user
+                                FROM
+                                    `vtiger_account`
+                                INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_account.accountid
+                                INNER JOIN vtiger_troubletickets on vtiger_troubletickets.parent_id = vtiger_account.accountid
+                                WHERE
+                                    vtiger_crmentity.deleted = 0
+                                    AND vtiger_troubletickets.ticketid = $record_id";
+                            $results_ticket_user = $adb->pquery($sql_get_ticket_user,array());
+                            if($adb->num_rows($results_ticket_user)>0) {
+                                $tk_assign_user = $adb->query_result($results_ticket_user, 0, 'tk_assign_user');
+                                if(in_array($tk_assign_user,$users_arr)){
+                                    $userId = $tk_assign_user;
+                                }
+                            }
+                        }
+                        ////
+                        $recordModel = Vtiger_Record_Model::getInstanceById($record_id,$rr_module);
+                        $recordModel->set('mode','edit');
+                        if(!empty($userId)){
+                            $recordModel->set($assignToFied,$userId);
+                        }
+                        if(!empty($rr_assigned_status)){
+                            $recordModel->set($rr_status_field,$rr_assigned_status);
+                        }
+                        $recordModel->save();
+
+                        $module_round_robin_policy_field = 'cf_'.strtolower($rr_module).'_round_robin_policy';
+                        $sql_table = "SELECT tablename FROM `vtiger_field` WHERE fieldname = ? AND tabid = (SELECT tabid from vtiger_tab where name = ?);";
+                        $re_table = $adb->pquery($sql_table,array($module_round_robin_policy_field,$rr_module));
+                        $table_name = $adb->query_result($re_table, 0, 'tablename');
+                        $sql_update_round_robin_policy_field = "UPDATE $table_name SET $module_round_robin_policy_field  = '$rr_name' WHERE ".$recordModel->getModule()->basetableid." = $record_id";
+                        $adb->pquery($sql_update_round_robin_policy_field,array());
+                        if(!empty($userId)){
+                            $sql_assigments = "INSERT INTO `vte_roundrobin_assigments` (roundrobinid,rr_assigned_user,rr_assigned_user_time,rr_record_id) VALUES(?,?,?,?)";
+                            $rr_assigned_user_time = date('Y-m-d h:i:s');
+                            $adb->pquery($sql_assigments,array($roundrobinid,$userId,$rr_assigned_user_time,$record_id));
+                        }
+                        $sql_del = "DELETE FROM vte_roundrobin_assigments WHERE roundrobinid = ? AND rr_assigned_user = ? AND rr_record_id = ?";
+                        $adb->pquery($sql_del,array($roundrobinid, $userId, 0));
+                        $key++;
+                        if($key == (count($users_arr))){
+                            $key = 0;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}else{
+    echo 'You are required to validate the extension before it can be use.';
+}

@@ -1,0 +1,145 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vte_sla_policies</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_policies` (
+				  `slaid` int(19) NOT NULL AUTO_INCREMENT,
+				  `policy_name` varchar(255) NOT NULL,
+				  `module` varchar(255),
+				  `picklist_field` varchar(255),
+				  `display_slalog` varchar(25),
+				  `status` varchar(255),
+				  `picklist_value` varchar(255),
+				  `time` int(11),
+				  `typetime` varchar(255),
+				  `conditions` text,
+				  PRIMARY KEY (`slaid`),
+				  INDEX(`slaid`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_actions</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_actions` (
+				  `id` int(19) NOT NULL AUTO_INCREMENT,
+				  `slaid` int(19) NOT NULL,
+				  `action_name` varchar(255) NOT NULL,
+				  `type` varchar(255),
+				  `trigger` varchar(255),
+				  `trigger_time` varchar(255),
+				  `trigger_typetime` varchar(255) ,
+				  `user` varchar(255) ,
+				  `type_id` varchar(255) ,
+				  `sequence` int(19),
+				  PRIMARY KEY (`id`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_actions_records</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_actions_records` (
+				  `id` int(19) NOT NULL AUTO_INCREMENT,
+				  `slaid` int(19) NOT NULL,
+				  `sla_actionsid` int(19) NOT NULL,
+				  `crmid` int(19) NOT NULL,
+				  `type` varchar(255) DEFAULT NULL,
+				  PRIMARY KEY (`id`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_businesshour</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_businesshour` (
+				  `busihourid` int(11) NOT NULL,
+				  `start_time` time,
+				  `end_time` time,
+				  `status` int(10),
+				  `week_day` varchar(255),
+				  PRIMARY KEY (`busihourid`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_businesshour_holiday</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_businesshour_holiday` (
+				  `holidayid` int(11) NOT NULL AUTO_INCREMENT,
+				  `holiday_name` varchar(255),
+				  `holiday_date` date,
+				  `default` varchar(10),
+				  PRIMARY KEY (`holidayid`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_related_rel</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_related_rel` (
+				  `id` int(11) NOT NULL AUTO_INCREMENT,
+				  `slaid` int(11) ,
+				  `crmid` int(11),
+				  `count_time_seconds` int(11),
+				  `time_changeon` datetime,
+				  `status` varchar(50),
+				  PRIMARY KEY (`id`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vteslapolicies_settings</name>
+			<sql><![CDATA[CREATE TABLE `vteslapolicies_settings` (
+				`enable`  int(3) NULL DEFAULT NULL
+				)]]></sql>
+		</table>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+                `module`  varchar(50) NOT NULL ,
+                `valid`  int(1) NULL ,
+                PRIMARY KEY (`module`));]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_actions_records</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_actions_records`
+					ADD INDEX `crmid_index` (`crmid`) USING BTREE
+					;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_actions_records</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_actions_records` ADD COLUMN `time` datetime ;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_actions_records</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_actions_records` ADD COLUMN `sla_action_count_time` int(11) ;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_actions_records</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_actions_records` ADD COLUMN `sla_action_status` varchar(10) ;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_related_rel</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_related_rel` ADD COLUMN `complete` int(5) ;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_policies</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_policies` ADD COLUMN `exclude_field` varchar(255) AFTER `picklist_field`;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_policies</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_policies` ADD COLUMN `exclude_fieldvalue` varchar(255) AFTER `exclude_field`;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_policies</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_policies` ADD COLUMN `business_hour` varchar(10) AFTER `conditions`;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_policies</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_policies` ADD COLUMN `fulfillment_values` varchar(255) AFTER `business_hour`;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_policies</name>
+			<sql><![CDATA[ALTER TABLE vte_sla_policies ADD COLUMN modifiedtime datetime;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_startid</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_startid` (`startid` int(19) DEFAULT NULL)]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_related_rel</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_related_rel` ADD INDEX `idx_slaid`(`slaid`), ADD INDEX `idx_crmid`(`crmid`);]]></sql>
+		</table>
+	</tables>
+</schema>

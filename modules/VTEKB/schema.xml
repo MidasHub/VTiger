@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vte_vtekb</name>
+			<sql><![CDATA[CREATE TABLE IF NOT EXISTS `vte_vtekb` (
+				`status`  int(3) NULL DEFAULT NULL,
+				`number_display`  int(3) NULL DEFAULT 5
+				);]]></sql>
+		</table>
+		<table>
+			<name>vte_vtekb</name>
+			<sql><![CDATA[ALTER TABLE `vte_vtekb` ADD COLUMN `open_by_default`  int(1) NULL DEFAULT 0 AFTER `number_display`;]]></sql>
+		</table>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+                `module`  varchar(50) NOT NULL ,
+                `valid`  int(1) NULL ,
+                PRIMARY KEY (`module`));]]></sql>
+		</table>
+	</tables>
+</schema>

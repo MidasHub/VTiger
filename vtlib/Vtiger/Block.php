@@ -71,13 +71,12 @@ class Vtiger_Block {
 	 * @access private
 	 */
 	function initialize($valuemap, $moduleInstance=false) {
-		$this->id = isset($valuemap['blockid']) ? $valuemap['blockid'] : null;
-		$this->label= isset($valuemap['blocklabel']) ? $valuemap['blocklabel'] : null;
-        $this->display_status = isset($valuemap['display_status']) ? $valuemap['display_status'] : null;
-		$this->sequence = isset($valuemap['sequence']) ? $valuemap['sequence'] : null;
-        $this->iscustom = isset($valuemap['iscustom']) ? $valuemap['iscustom'] : null;
-        $tabid = isset($valuemap['tabid']) ? $valuemap['tabid'] : null;
-		$this->module= $moduleInstance ? $moduleInstance : Vtiger_Module::getInstance($tabid);
+		$this->id = $valuemap[blockid];
+		$this->label= $valuemap[blocklabel];
+        $this->display_status = $valuemap[display_status];
+		$this->sequence = $valuemap[sequence];
+        $this->iscustom = $valuemap[iscustom];
+		$this->module=$moduleInstance? $moduleInstance: Vtiger_Module::getInstance($valuemap[tabid]);
 	}
 
 	/**
@@ -136,7 +135,13 @@ class Vtiger_Block {
 	function delete($recursive=true) {
 		if($recursive) {
 			$fields = Vtiger_Field::getAllForBlock($this);
-			foreach($fields as $fieldInstance) $fieldInstance->delete($recursive);
+			if(!empty($fields))
+			{
+				foreach($fields as $fieldInstance)
+				{
+					$fieldInstance->delete($recursive);
+				}
+			}
 		}
 		$this->__delete();
 	}
@@ -168,22 +173,28 @@ class Vtiger_Block {
 	 */
 	static function getInstance($value, $moduleInstance=false) {
 		global $adb;
-		$instance = false;
-
-		if(Vtiger_Utils::isNumber($value)) {
-			$query = "SELECT * FROM vtiger_blocks WHERE blockid=?";
-			$queryParams = Array($value);
+		$cache = Vtiger_Cache::getInstance();
+		if($moduleInstance && $cache->getBlockInstance($value, $moduleInstance->id)){
+			return $cache->getBlockInstance($value, $moduleInstance->id);
 		} else {
-			$query = "SELECT * FROM vtiger_blocks WHERE blocklabel=? AND tabid=?";
-			$queryParams = Array($value, $moduleInstance->id);
+			$instance = false;
+			$query = false;
+			$queryParams = false;
+			if(Vtiger_Utils::isNumber($value)) {
+				$query = "SELECT * FROM vtiger_blocks WHERE blockid=?";
+				$queryParams = Array($value);
+			} else {
+				$query = "SELECT * FROM vtiger_blocks WHERE blocklabel=? AND tabid=?";
+				$queryParams = Array($value, $moduleInstance->id);
+			}
+			$result = $adb->pquery($query, $queryParams);
+			if($adb->num_rows($result)) {
+				$instance = new self();
+				$instance->initialize($adb->fetch_array($result), $moduleInstance);
+			}
+			$cache->setBlockInstance($value,$instance->module->id, $instance);
+			return $instance;
 		}
-
-		$result = $adb->pquery($query, $queryParams);
-		if($adb->num_rows($result)) {
-			$instance = new self();
-			$instance->initialize($adb->fetch_array($result), $moduleInstance);
-		}
-		return $instance;
 	}
 
 	/**

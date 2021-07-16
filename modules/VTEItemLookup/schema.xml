@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+				`module`  varchar(50) NOT NULL ,
+				`valid`  int(1) NULL ,
+				PRIMARY KEY (`module`));]]></sql>
+		</table>
+		<table>
+			<name>vte_item_lookup_setting</name>
+			<sql><![CDATA[CREATE TABLE `vte_item_lookup_setting` (
+				`enable`  int(3) NULL DEFAULT 1
+				)]]></sql>
+		</table>
+		<table>
+			<name>vte_item_lookup_configuare</name>
+			<sql><![CDATA[CREATE TABLE `vte_item_lookup_configuare` (
+				`id`  integer,
+				`default_module`  varchar(50),
+				`hide_add_product_button`  int(3),
+				`hide_add_service_button`  int(3),
+				`product_filter_field_1`  varchar(50) ,
+				`product_filter_field_2`  varchar(50) ,
+				`product_filter_field_3`  varchar(50) ,
+				`product_show_instock_filter`  int(3),
+				`product_show_inactive_filter`  int(3),
+				`product_show_picture_column`  int(3),
+				`product_show_picture_size_width`  varchar(50),
+				`product_show_picture_size_height`  varchar(50),
+				`service_filter_field_1`  varchar(50) ,
+				`service_filter_field_2`  varchar(50) ,
+				`service_filter_field_3`  varchar(50) ,
+				`service_show_inactive_filter`  int(3),
+				PRIMARY KEY (`id`))]]></sql>
+		</table>
+		<table>
+			<name>vte_item_lookup_configuare</name>
+			<sql><![CDATA[INSERT INTO `vte_item_lookup_configuare` (`default_module`, `hide_add_product_button`, `hide_add_service_button`, `product_show_instock_filter`, `product_show_inactive_filter`, `product_show_picture_column`, `product_show_picture_size_width`, `product_show_picture_size_height`, `service_show_inactive_filter`,product_filter_field_1,product_filter_field_2,service_filter_field_1) VALUES ('Products', '0', '0', '0', '1', '1', '120','120', '1','productcategory','vendor_id','servicecategory');]]></sql>
+		</table>
+		<table>
+			<name>vte_item_lookup_configuare</name>
+			<sql><![CDATA[ALTER TABLE `vte_item_lookup_configuare`
+			ADD COLUMN `product_bundles`  int(3) NULL AFTER `service_show_inactive_filter`;]]></sql>
+		</table>
+		<table>
+			<name>vte_item_lookup_configuare</name>
+			<sql><![CDATA[ALTER TABLE `vte_item_lookup_configuare`
+			ADD COLUMN `product_show_bundles_filter`  int(3) NULL AFTER `product_bundles`;]]></sql>
+		</table>
+		<table>
+			<name>vte_item_lookup_configuare</name>
+			<sql><![CDATA[UPDATE `vte_item_lookup_configuare` SET product_show_bundles_filter = 1;]]></sql>
+		</table>
+		<table>
+			<name>vte_item_lookup_configuare</name>
+			<sql><![CDATA[ALTER TABLE `vte_item_lookup_configuare`
+			ADD COLUMN `quoter_product_sections`  varchar(255) NULL AFTER `product_show_bundles_filter`,
+			ADD COLUMN `quoter_product_subtotal`  varchar(255) NULL AFTER `quoter_product_sections`,
+			ADD COLUMN `quoter_service_sections`  varchar(255) NULL AFTER `quoter_product_subtotal`,
+			ADD COLUMN `quoter_service_subtotal`  varchar(255) NULL AFTER `quoter_service_sections`;]]></sql>
+		</table>
+		<table>
+			<name>vtiger_products</name>
+			<sql><![CDATA[ALTER TABLE `vtiger_products` ADD INDEX `idx_productcategory` (`productcategory`) USING BTREE ;]]></sql>
+		</table>
+		<table>
+			<name>vtiger_products</name>
+			<sql><![CDATA[ALTER TABLE `vtiger_products` ADD INDEX `idx_vendor_id` (`vendor_id`) USING BTREE ;]]></sql>
+		</table>
+		<table>
+			<name>vtiger_service</name>
+			<sql><![CDATA[ALTER TABLE `vtiger_service` ADD INDEX `idx_servicecategory` (`servicecategory`) USING BTREE ;]]></sql>
+		</table>
+	</tables>
+</schema>

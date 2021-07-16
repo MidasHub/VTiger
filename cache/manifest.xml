@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<module>
+    <name>VTESLAPolicies</name>
+    <label>SLA Policies</label>
+    <parent>Tools</parent>
+    <version>1.0</version>
+    <license>
+        <file>License.txt</file>
+    </license>
+    <dependencies>
+        <vtiger_version>7.0.0</vtiger_version>
+        <vtiger_max_version>7.*</vtiger_max_version>
+    </dependencies>
+    <modulebundle>true</modulebundle>
+    <modulelist>
+		<dependent_module>
+            <name>VTESLALog</name>
+            <install_sequence>1</install_sequence>
+            <filepath>VTESLALog.zip</filepath>
+        </dependent_module>
+        <dependent_module>
+            <name>VTESLAPolicies</name>
+            <install_sequence>2</install_sequence>
+            <filepath>VTESLAPolicies.zip</filepath>
+        </dependent_module>
+    </modulelist>
+</module>

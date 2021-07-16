@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>automatedbackup_settings</name>
+			<sql><![CDATA[CREATE TABLE `automatedbackup_settings` (
+				`id`  int(11) NOT NULL AUTO_INCREMENT ,
+				`key`  varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,
+				`value`  text CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL ,
+				PRIMARY KEY (`id`)
+				);]]></sql>
+		</table>
+		<table>
+			<name>automatedbackup_logs</name>
+			<sql><![CDATA[CREATE TABLE `automatedbackup_logs` (
+				`id`  int(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
+				`createdtime` datetime DEFAULT NULL,
+				`filename`  varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,
+				`filetype`  varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,
+				`filesize`  varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,
+				`path`  varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,
+				`deleted`  int(1) NOT NULL ,
+				`type`  varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,
+				PRIMARY KEY (`id`)
+				);]]></sql>
+		</table>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+                `module`  varchar(50) NOT NULL ,
+                `valid`  int(1) NULL ,
+                PRIMARY KEY (`module`));]]></sql>
+		</table>
+	</tables>
+</schema>
