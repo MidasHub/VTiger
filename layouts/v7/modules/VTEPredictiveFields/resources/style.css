@@ -1,0 +1,67 @@
+#listview-table tr th{
+    text-align: left;
+}
+#listview-table tr th:last-child{
+    text-align: center;
+}
+#listview-table tr td:first-child{
+    width: 8%;
+}
+#listview-table tr td:last-child{
+    width: 12%;
+    text-align: right;
+    padding-right: 10px;
+}
+#listview-table tr td:nth-child(2){
+    width: 15%;
+}
+#listview-table tr td:nth-child(3){
+    width: 10%;
+}
+
+h4.label-block{
+    font-weight: 700;
+}
+.control-label{
+    text-align: left !important;
+}
+
+.predictive-field-info{
+    border: 1px solid rgb(217, 217, 217);
+    border-left: #52a9cd solid 4px;
+    max-height: 300px;
+    height: 113px;
+}
+
+.predictive-field-info > .label-info{
+    color: #52a9cd;
+    background-color: white !important;
+}
+
+.predictive-field-info > .content-info{
+    resize: none;
+    border: none;
+    width: 100%;
+    color: #9b9997;
+    max-height: 255px;
+    height: 255px;
+}
+#resolved_time{
+    display: inline-block;
+    width: 70%;
+}
+
+.buttonSave{
+    font-size: 14px;
+    color: white;
+    padding: 7px 25px
+}
+
+.error-validate{
+    border: 1px solid #ba4a47 !important;
+    background: #fdeeee !important;
+}
+#last_x_days{
+    width: 50px;
+    padding-left: 5px;
+}

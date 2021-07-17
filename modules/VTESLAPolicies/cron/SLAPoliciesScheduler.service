@@ -1,0 +1,939 @@
+<?php
+/**
+ * Date: 1/11/18
+ * Time: 2:57 PM
+ */
+include_once("config.inc.php");
+require_once 'include/utils/utils.php';
+require_once 'include/utils/CommonUtils.php';
+require_once('modules/com_vtiger_workflow/VTEntityCache.inc');
+require_once('modules/com_vtiger_workflow/VTWorkflowUtils.php');
+require_once 'includes/Loader.php';
+vimport('includes.runtime.EntryPoint');
+set_time_limit(0);
+global $adb,$current_user,$default_timezone;
+
+$util = new VTWorkflowUtils();
+$admin = $util->adminUser();
+$currentTime = strtotime(ConvertTimeZone(date('Y-m-d H:i:s'),$default_timezone));
+$result = $adb->pquery("SELECT * FROM vte_sla_policies WHERE status = 'Active'",array());
+$rsStartId = $adb->pquery("SELECT * FROM vte_sla_startid");
+$startId = $adb->query_result($rsStartId,0,'startid');
+while($rowSLAPolicies = $adb->fetchByAssoc($result)){
+    $modifiedTimeSLA = $rowSLAPolicies['modifiedtime'];
+    $policyName = $rowSLAPolicies['policy_name'];
+    $conditions = $rowSLAPolicies['conditions'];
+    $picklistField = $rowSLAPolicies['picklist_field'];
+    $picklistValue = $rowSLAPolicies['picklist_value'];
+    $moduleName = $rowSLAPolicies['module'];
+    $slaId = $rowSLAPolicies['slaid'];
+    $resolved_time = $rowSLAPolicies['time'];
+    $resolved_typetime =$rowSLAPolicies['typetime'];
+    $statusSLA = $rowSLAPolicies['status'];
+    $excludeField = $rowSLAPolicies['exclude_field'];
+    $excludeFieldValues = explode('|##|',$rowSLAPolicies['exclude_fieldvalue']);
+    $fulfillmentfValues = explode('|##|',$rowSLAPolicies['fulfillment_values']);
+    $businessHours = $rowSLAPolicies['business_hour'];
+    $convertResolvedTime = $resolved_typetime == 'Mins' ? intval($resolved_time) * 60 : intval($resolved_time) * 60 * 60;
+    $json = new Zend_Json();
+    $conditions = $json->decode(html_entity_decode($conditions));
+    foreach ($conditions as $groupIdx => $groupCondition) {
+        if(empty($conditions[$groupIdx]['columns'])){
+            unset($conditions[$groupIdx]);
+            unset($conditions[$groupIdx-1]['condition']);
+        }
+    }
+    $entityInstance = CRMEntity::getInstance($moduleName);
+    $listFields = $entityInstance->list_fields_name;
+    $listFields[] = 'id';
+    $listFields[$picklistField] = $picklistField;
+    $listFields['modifiedtime'] = 'modifiedtime';
+
+    $queryGenerator = new EnhancedQueryGenerator($moduleName, $current_user);
+    $queryGenerator->setFields($listFields);
+    $queryGenerator->parseAdvFilterList($conditions);
+
+    $queryRecords = $queryGenerator->getQuery();
+
+    $tabModuleId = getTabid($moduleName);
+    $rsFields = $adb->pquery('SELECT * FROM vtiger_field WHERE tabid = ? AND fieldname = ?',array($tabModuleId,$picklistField));
+    $columnName = $adb->query_result($rsFields,0,'columnname');
+    $tableName = $adb->query_result($rsFields,0,'tablename');
+
+    $queryRecords = split('FROM',$queryRecords);
+    $queryRecords = "SELECT $slaId as 'slaid',vtiger_crmentity.crmid,'Time Left' as 'status', 0 as 'count_time_seconds' FROM" . $queryRecords[1] ;
+    if($picklistField == 'None'){
+        $queryRecords .= " AND vtiger_crmentity.createdtime >= '$modifiedTimeSLA'";
+    }else{
+        $queryRecords .= " AND $tableName.$columnName = '$picklistValue'";
+    }
+    $queryRecords .= " AND vtiger_crmentity.crmid >= $startId AND vtiger_crmentity.crmid NOT IN (SELECT crmid FROM vte_sla_related_rel WHERE slaid = $slaId)";
+    $queryInsertSLARelated = "INSERT INTO vte_sla_related_rel(slaid,crmid,status,count_time_seconds) $queryRecords";
+    $adb->pquery($queryInsertSLARelated,array());
+
+    $rsRecordsRelatedSLA = $adb->pquery("SELECT *,vte_sla_related_rel.status as 'sla_status' FROM vte_sla_related_rel 
+                                                    INNER JOIN vtiger_crmentity ON vte_sla_related_rel.crmid = vtiger_crmentity.crmid 
+                                                    WHERE slaid = ? AND deleted = 0 AND vte_sla_related_rel.status <> 'Fulfilled' 
+                                                    AND (vte_sla_related_rel.complete IS NULL OR vte_sla_related_rel.complete <> 1)",array($slaId));
+
+    $rsSLAActions = $adb->pquery('SELECT * FROM vte_sla_actions WHERE slaid = ? ORDER BY sequence ASC',array($slaId));
+    $slaActions = array();
+    $indexSLAActions = 0;
+    while ($rowSLAActions = $adb->fetchByAssoc($rsSLAActions)) {
+        $slaActions[$indexSLAActions]['user'] = $rowSLAActions['user'];
+        $slaActions[$indexSLAActions]['id'] = $rowSLAActions['id'];
+        $slaActions[$indexSLAActions]['name'] = $rowSLAActions['action_name'];
+        $slaActions[$indexSLAActions]['type'] = $rowSLAActions['type'];
+        $slaActions[$indexSLAActions]['trigger'] = $rowSLAActions['trigger'];
+        $slaActions[$indexSLAActions]['trigger_time'] = $rowSLAActions['trigger_time'];
+        $slaActions[$indexSLAActions]['trigger_typetime'] = $rowSLAActions['trigger_typetime'];
+        $slaActions[$indexSLAActions]['user'] = $rowSLAActions['user'];
+        $slaActions[$indexSLAActions]['type_id'] = $rowSLAActions['type_id'];
+        $slaActions[$indexSLAActions]['convertTriggerTime'] = $rowSLAActions['trigger_typetime'] == 'Mins' ? intval($rowSLAActions['trigger_time']) * 60 : intval($rowSLAActions['trigger_time']) * 60 * 60;
+        $indexSLAActions++;
+    }
+    if($businessHours == 'Yes') {
+        $resultBusinessHour = $adb->pquery('SELECT * FROM vte_sla_businesshour WHERE status = 1',array());
+        $businessDays = array();
+        $businessDayHours = array();
+        while($rowBusinessHour = $adb->fetchByAssoc($resultBusinessHour)){
+            $businessDays[] = $rowBusinessHour['busihourid'];
+            $start = date('Y-m-d H:i:s',strtotime($rowBusinessHour['start_time']));
+            $end = date('Y-m-d H:i:s',strtotime($rowBusinessHour['end_time']));
+            if($start > $end){
+                $endDateTime = new DateTime($end);
+                $endDateTime->modify('+1 day');
+                $end = $endDateTime->format('Y-m-d H:i:s');
+            }
+            $businessDayHours[$rowBusinessHour['busihourid']]['start'] = $start;
+            $businessDayHours[$rowBusinessHour['busihourid']]['end'] = $end;
+        }
+        $resultHoliday = $adb->pquery('SELECT * FROM vte_sla_businesshour_holiday',array());
+        $holidays = array();
+        while($rowHoliday = $adb->fetchByAssoc($resultHoliday)){
+            $holidays[] = $rowHoliday['holiday_date'];
+        }
+        $currentDayOfWeek = date('N',$currentTime);
+        $currentTimeOfDay = date('Y-m-d H:i:s',$currentTime);
+        $currentDayOfYears = date('Y-m-d',$currentTime);
+
+        if(in_array($currentDayOfWeek,$businessDays) && $currentTimeOfDay > $businessDayHours[$currentDayOfWeek]['start'] && $currentTimeOfDay < $businessDayHours[$currentDayOfWeek]['end'] && !in_array($currentDayOfYears,$holidays)){
+            while ($rowRecord = $adb->fetchByAssoc($rsRecordsRelatedSLA)) {
+                $updateStatus = false;
+                $recordId = $rowRecord['crmid'];
+                $statusChangeFieldPickList = handleChangeFieldPicklist($slaId,$recordId,$picklistField,$picklistValue);
+                if($statusChangeFieldPickList == false){
+                    continue;
+                }
+                $assignTo = $rowRecord['smownerid'];
+                $recordSLAStatus = $rowRecord['sla_status'];
+                $recordSLACountTime = $rowRecord['count_time_seconds'];
+                $calculateFieldPicklistTime = $rowRecord['time_changeon'];
+                createSLALogFirstTime($slaId,$recordId,$policyName,'Policy Assigned','Time Left',$convertResolvedTime);
+                $rsCheckExcludeFields = $adb->pquery('SELECT * FROM vtiger_modtracker_basic a
+                                                            INNER JOIN vtiger_modtracker_detail b ON a.id = b.id
+                                                            WHERE a.crmid = ? AND b.fieldname=?
+                                                            ORDER BY a.id DESC
+                                                            LIMIT 0,1', array($recordId, $excludeField));
+                $preExcludeFieldValue = $adb->query_result($rsCheckExcludeFields, 0, 'prevalue');
+                $checkExcludeFieldValue =  $adb->query_result($rsCheckExcludeFields, 0, 'postvalue');
+                if(in_array($checkExcludeFieldValue,$excludeFieldValues)){
+                    $alertNameSLALog = 'Policy Paused (' . $checkExcludeFieldValue . ')';
+                    createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,'',$entityInstance);
+                    continue;
+                }
+                $timeCalculate = $businessDayHours[$currentDayOfWeek]['start'];
+
+                if($calculateFieldPicklistTime > $businessDayHours[$currentDayOfWeek]['start']){
+                    $timeCalculate = $calculateFieldPicklistTime;
+                }
+
+                if($picklistField == 'None'){
+                    $rsChangeFieldPicklist = $adb->pquery('SELECT * FROM vtiger_modtracker_basic a
+                                                                INNER JOIN vtiger_modtracker_detail b ON a.id = b.id
+                                                                WHERE a.crmid = ?
+                                                                ORDER BY a.id DESC
+                                                                LIMIT 0,1', array($recordId));
+                }else{
+                    $rsChangeFieldPicklist = $adb->pquery('SELECT * FROM vtiger_modtracker_basic a
+                                                                INNER JOIN vtiger_modtracker_detail b ON a.id = b.id
+                                                                WHERE a.crmid = ? AND b.fieldname=?
+                                                                ORDER BY a.id DESC
+                                                                LIMIT 0,1', array($recordId, $picklistField));
+                }
+                $changeFieldPicklistPostValue =  $adb->query_result($rsChangeFieldPicklist, 0, 'postvalue');
+                $changeFieldPicklistTime = $adb->query_result($rsChangeFieldPicklist,0,'changedon');
+                $changeFieldPicklistTimeExplode = explode(' ',$changeFieldPicklistTime);
+                if($changeFieldPicklistTimeExplode[0] == date('Y-m-d',$currentTime) && $businessDayHours[$currentDayOfWeek]['start'] < $changeFieldPicklistTime && $changeFieldPicklistTime < $businessDayHours[$currentDayOfWeek]['end'] ){
+                    if(!$calculateFieldPicklistTime){
+                        $calculateFieldPicklistTime = $changeFieldPicklistTime;
+                    }
+                    $timeCalculate = $calculateFieldPicklistTime;
+                }
+
+                if(in_array($preExcludeFieldValue,$excludeFieldValues) && $preExcludeFieldValue){
+                    $timeChangeExcludeField = $adb->query_result($rsCheckExcludeFields,0,'changedon');
+                    if($timeChangeExcludeField > $calculateFieldPicklistTime){
+                        $timeCalculate = $timeChangeExcludeField;
+                        $alertNameSLALog = 'Policy Resumed (' . $checkExcludeFieldValue . ')';
+                        createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,'',$entityInstance);
+                    }
+                }
+                if(in_array($checkExcludeFieldValue,$fulfillmentfValues)){
+                    if($recordSLACountTime <= $convertResolvedTime){
+                        $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                        $remainingText = convertTimeToText($remainingSeconds);
+                        $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                        $timeElapsedSeconds = $recordSLACountTime;
+                        $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                        $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                        $statusBlockSLADetails = 'Fulfilled';
+                        // BEGIN - Update field value Block SLA Details for Modules Selected
+                        $queryUpdateBlockSLADetails = "UPDATE {$entityInstance->table_name} SET ";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_name' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain_h' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_status' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed_h' . "= ?";
+                        $queryUpdateBlockSLADetails .= " WHERE {$entityInstance->table_index} = ?";
+                        $paramsUpdateBlockSLADetails = array($policyName, $remainingText, $remainingHours, $statusBlockSLADetails, $timeElapsedText, $timeElapsedHours, $recordId);
+                        $adb->pquery($queryUpdateBlockSLADetails, $paramsUpdateBlockSLADetails);
+                        // END - Update field value Block SLA Details for Modules Selected
+                        $alertNameSLALog = $statusBlockSLADetails ." ($checkExcludeFieldValue)";
+                    }else{
+                        $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                        $remainingText = convertTimeToText($remainingSeconds);
+                        $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                        $timeElapsedSeconds = $recordSLACountTime;
+                        $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                        $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                        $statusBlockSLADetails = 'Violated';
+                        // BEGIN - Update field value Block SLA Details for Modules Selected
+                        $queryUpdateBlockSLADetails = "UPDATE {$entityInstance->table_name} SET ";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_name' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain_h' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_status' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed' . "= ?,";
+                        $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed_h' . "= ?";
+                        $queryUpdateBlockSLADetails .= " WHERE {$entityInstance->table_index} = ?";
+                        $paramsUpdateBlockSLADetails = array($policyName, $remainingText, $remainingHours, $statusBlockSLADetails, $timeElapsedText, $timeElapsedHours, $recordId);
+                        $adb->pquery($queryUpdateBlockSLADetails, $paramsUpdateBlockSLADetails);
+                        // END - Update field value Block SLA Details for Modules Selected
+                        $alertNameSLALog = $statusBlockSLADetails . " ($checkExcludeFieldValue)";
+                    }
+                    createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,$statusBlockSLADetails,$entityInstance);
+                    // Update Complete Records
+                    $adb->pquery('UPDATE vte_sla_related_rel SET complete = 1 WHERE slaid = ? AND crmid = ?',array($slaId,$recordId));
+                    continue;
+                }
+                $countTimeSeconds = $currentTime - strtotime($timeCalculate);
+                $recordSLACountTime = $recordSLACountTime + $countTimeSeconds;
+                if($recordSLAStatus == 'Time Left') {
+                    if($recordSLACountTime < $convertResolvedTime){
+                        if($recordSLACountTime >= $convertResolvedTime){
+                            $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                            $remainingText = convertTimeToText($remainingSeconds);
+                            $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                            $timeElapsedSeconds = $convertResolvedTime;
+                            $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                            $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                            $statusBlockSLADetails = 'Violated';
+                        }else{
+                            $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                            $remainingText = convertTimeToText($remainingSeconds);
+                            $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                            $timeElapsedSeconds = $recordSLACountTime;
+                            $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                            $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                            $statusBlockSLADetails = 'Time Left';
+                        }
+                    }else{
+                        $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                        $remainingText = convertTimeToText($remainingSeconds);
+                        $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                        $timeElapsedSeconds = $recordSLACountTime;
+                        $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                        $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                        $statusBlockSLADetails = 'Violated';
+                    }
+                    if($statusBlockSLADetails == 'Violated'){
+                        $updateStatus = true;
+                    }
+                }else{
+                    $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                    $remainingText = convertTimeToText($remainingSeconds);
+                    $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                    $timeElapsedSeconds = $recordSLACountTime;
+                    $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                    $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                    $statusBlockSLADetails = 'Violated';
+                }
+
+                // BEGIN - Update field value Block SLA Details for Modules Selected
+                $queryUpdateBlockSLADetails = "UPDATE {$entityInstance->table_name} SET ";
+                $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_name' . "= ?,";
+                $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain' . "= ?,";
+                $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain_h' . "= ?,";
+                $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_status' . "= ?,";
+                $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed' . "= ?,";
+                $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed_h' . "= ?";
+                $queryUpdateBlockSLADetails .= " WHERE {$entityInstance->table_index} = ?";
+                $paramsUpdateBlockSLADetails = array($policyName, $remainingText, $remainingHours, $statusBlockSLADetails, $timeElapsedText, $timeElapsedHours, $recordId);
+                $adb->pquery($queryUpdateBlockSLADetails, $paramsUpdateBlockSLADetails);
+                // END - Update field value Block SLA Details for Modules Selected
+                $alertNameSLALog = 'Update Status(Violated)';
+                if($updateStatus == true){
+                    createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,$statusBlockSLADetails,$entityInstance);
+                }
+                //Update Status for rel SLA
+                $adb->pquery('UPDATE vte_sla_related_rel SET time_changeon = ?, count_time_seconds = ?, status = ? WHERE crmid = ? AND slaid = ?',array(date('Y-m-d H:i:s',$currentTime),$recordSLACountTime,$statusBlockSLADetails,$recordId,$slaId));
+
+                if($statusBlockSLADetails == 'Time Left' || $statusBlockSLADetails == 'Violated'){
+                    // get records do not perform SLA Action on SLA
+                    foreach ($slaActions as $key => $slaAction) {
+                        $user = $slaAction['user'];
+                        $slaActionId = $slaAction['id'];
+                        $slaActionName = $slaAction['name'];
+                        $type = $slaAction['type'];
+                        $trigger = $slaAction['trigger'];
+                        $trigger_time = $slaAction['trigger_time'];
+                        $trigger_typetime = $slaAction['trigger_typetime'];
+                        $userIdOrGroupId = $slaAction['user'];
+                        $typeId = $slaAction['type_id'];
+                        $convertTriggerTime = $slaAction['convertTriggerTime'];
+                        $rsRecordsRelatedSLAAction = $adb->pquery('SELECT * FROM vte_sla_actions_records WHERE slaid = ? AND crmid = ? AND sla_actionsid = ?', array($slaId, $recordId,$slaActionId));
+                        if($adb->num_rows($rsRecordsRelatedSLAAction) == 0){
+                            $slaActionRecordsCountTimeSeconds = $currentTime - strtotime($timeCalculate);
+                            $paramsInsertSLAActionRecords = array($slaId,$slaActionId,$recordId,$type,$slaActionRecordsCountTimeSeconds,0);
+                            $adb->pquery('INSERT INTO vte_sla_actions_records(slaid,sla_actionsid,crmid,type,sla_action_count_time,sla_action_status) VALUES(?,?,?,?,?,?)',$paramsInsertSLAActionRecords);
+                        }else{
+                            $slaActionRecordsStatus = $adb->query_result($rsRecordsRelatedSLAAction,0,'sla_action_status');
+                            if($slaActionRecordsStatus == 1){
+                                continue;
+                            }
+                            $slaActionRecordsCountTimeSeconds = $adb->query_result($rsRecordsRelatedSLAAction,0,'sla_action_count_time');
+                            if(!$slaActionRecordsCountTimeSeconds){
+                                $slaActionRecordsCountTimeSeconds = 0;
+                            }
+                            $slaActionRecordsCountTimeSeconds = $slaActionRecordsCountTimeSeconds + ($currentTime - strtotime($timeCalculate));
+                        }
+                        $adb->pquery('UPDATE vte_sla_actions_records SET sla_action_count_time = ? WHERE slaid = ? AND sla_actionsid = ? AND crmid = ?',array($slaActionRecordsCountTimeSeconds,$slaId,$slaActionId,$recordId));
+
+                        if ($trigger == 'Before') {
+                            $timeAction = $convertResolvedTime - $convertTriggerTime;
+                        } else {
+                            $timeAction = $convertResolvedTime + $convertTriggerTime;
+                        }
+
+                        if($slaActionRecordsCountTimeSeconds >= $timeAction){
+                            if ($type == 'Email') {
+                                // get Emails
+                                $toEmails = '';
+                                if($userIdOrGroupId == ''){
+                                    $userIdOrGroupId = $rowRecord['smownerid'];
+                                }
+                                $rsUsers = $adb->pquery('SELECT * FROM vtiger_users WHERE id = ?', array($userIdOrGroupId));
+                                $numrowsUsers = $adb->num_rows($rsUsers);
+                                if ($numrowsUsers == 0) {
+                                    $rsGroups = $adb->pquery('SELECT * FROM vtiger_users2group INNER JOIN vtiger_users ON vtiger_users2group.userid = vtiger_users.id WHERE groupid =?', array($userIdOrGroupId));
+                                    $numrowGroups = $adb->num_rows($rsGroups);
+                                    for ($i = 0; $i < $numrowGroups; $i++) {
+                                        $toEmails[$i] = $adb->query_result($rsGroups, $i, 'email1');
+                                    }
+
+                                } else {
+                                    $toEmails[] = $adb->query_result($rsUsers, 0, 'email1');
+                                }
+                                // Send Mail
+                                $status = sendMail($rowRecord, $typeId, $toEmails);
+                            } elseif ($type == 'Workflow') {
+                                $status = workflows($util, $admin, $moduleName, $recordId, $typeId);
+                            } else {
+                                $assignTo = $user;
+                                $status = reassign($recordId, $userIdOrGroupId);
+                            }
+                            if ($status) {
+                                $time = date('Y-m-d H:i:s', $currentTime);
+                                $adb->pquery('UPDATE vte_sla_actions_records SET `time` = ?, sla_action_status = 1 WHERE slaid =? AND crmid = ? AND sla_actionsid = ?',array($time,$slaId,$recordId,$slaActionId));
+                                $triggerText = "$trigger_time $trigger_typetime $trigger Resolution";
+                                createSLALogSLAAction($slaId,$recordId,$policyName,$slaActionName,$statusBlockSLADetails,$type,$triggerText,$assignTo,$entityInstance);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }else{
+        while ($rowRecord = $adb->fetchByAssoc($rsRecordsRelatedSLA)) {
+            $updateStatus = false;
+            $recordId = $rowRecord['crmid'];
+            $statusChangeFieldPickList = handleChangeFieldPicklist($slaId,$recordId,$picklistField,$picklistValue);
+            if($statusChangeFieldPickList == false){
+                continue;
+            }
+            $assignTo = $rowRecord['smownerid'];
+            $recordSLAStatus = $rowRecord['sla_status'];
+            $recordSLACountTime = $rowRecord['count_time_seconds'];
+            $calculateFieldPicklistTime = $rowRecord['time_changeon'];
+            createSLALogFirstTime($slaId,$recordId,$policyName,'Policy Assigned','Time Left',$convertResolvedTime);
+            $rsCheckExcludeFields = $adb->pquery('SELECT * FROM vtiger_modtracker_basic a
+                                                            INNER JOIN vtiger_modtracker_detail b ON a.id = b.id
+                                                            WHERE a.crmid = ? AND b.fieldname=?
+                                                            ORDER BY a.id DESC
+                                                            LIMIT 0,1', array($recordId, $excludeField));
+            $preExcludeFieldValue = $adb->query_result($rsCheckExcludeFields, 0, 'prevalue');
+            $checkExcludeFieldValue =  $adb->query_result($rsCheckExcludeFields, 0, 'postvalue');
+            if(in_array($checkExcludeFieldValue,$excludeFieldValues)){
+                $alertNameSLALog = 'Policy Paused (' . $checkExcludeFieldValue . ')';
+                createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,'',$entityInstance);
+                continue;
+            }
+
+            $timeCalculate = $calculateFieldPicklistTime;
+            if($picklistField == 'None'){
+                $rsChangeFieldPicklist = $adb->pquery('SELECT * FROM vtiger_modtracker_basic a
+                                                                INNER JOIN vtiger_modtracker_detail b ON a.id = b.id
+                                                                WHERE a.crmid = ?
+                                                                ORDER BY a.id DESC
+                                                                LIMIT 0,1', array($recordId));
+            }else{
+                $rsChangeFieldPicklist = $adb->pquery('SELECT * FROM vtiger_modtracker_basic a
+                                                                INNER JOIN vtiger_modtracker_detail b ON a.id = b.id
+                                                                WHERE a.crmid = ? AND b.fieldname=?
+                                                                ORDER BY a.id DESC
+                                                                LIMIT 0,1', array($recordId, $picklistField));
+            }
+
+            $changeFieldPicklistPostValue =  $adb->query_result($rsChangeFieldPicklist, 0, 'postvalue');
+            $changeFieldPicklistTime = $adb->query_result($rsChangeFieldPicklist,0,'changedon');
+            if($changeFieldPicklistTime > $calculateFieldPicklistTime){
+                $timeCalculate = $changeFieldPicklistTime;
+            }
+
+            if(in_array($preExcludeFieldValue,$excludeFieldValues) && $preExcludeFieldValue){
+                $timeChangeExcludeField = $adb->query_result($rsCheckExcludeFields,0,'changedon');
+                if($timeChangeExcludeField > $calculateFieldPicklistTime){
+                    $timeCalculate = $timeChangeExcludeField;
+                    $alertNameSLALog = 'Policy Resumed (' . $checkExcludeFieldValue . ')';
+                    createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,'',$entityInstance);
+                }
+            }
+            if(in_array($checkExcludeFieldValue,$fulfillmentfValues)){
+                if($recordSLACountTime <= $convertResolvedTime){
+                    $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                    $remainingText = convertTimeToText($remainingSeconds);
+                    $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                    $timeElapsedSeconds = $recordSLACountTime;
+                    $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                    $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                    $statusBlockSLADetails = 'Fulfilled';
+                    // BEGIN - Update field value Block SLA Details for Modules Selected
+                    $queryUpdateBlockSLADetails = "UPDATE {$entityInstance->table_name} SET ";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_name' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain_h' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_status' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed_h' . "= ?";
+                    $queryUpdateBlockSLADetails .= " WHERE {$entityInstance->table_index} = ?";
+                    $paramsUpdateBlockSLADetails = array($policyName, $remainingText, $remainingHours, $statusBlockSLADetails, $timeElapsedText, $timeElapsedHours, $recordId);
+                    $adb->pquery($queryUpdateBlockSLADetails, $paramsUpdateBlockSLADetails);
+                    // END - Update field value Block SLA Details for Modules Selected
+                    $alertNameSLALog = $statusBlockSLADetails ." ($checkExcludeFieldValue)";
+                }else{
+                    $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                    $remainingText = convertTimeToText($remainingSeconds);
+                    $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                    $timeElapsedSeconds = $recordSLACountTime;
+                    $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                    $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                    $statusBlockSLADetails = 'Violated';
+                    // BEGIN - Update field value Block SLA Details for Modules Selected
+                    $queryUpdateBlockSLADetails = "UPDATE {$entityInstance->table_name} SET ";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_name' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain_h' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_status' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed' . "= ?,";
+                    $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed_h' . "= ?";
+                    $queryUpdateBlockSLADetails .= " WHERE {$entityInstance->table_index} = ?";
+                    $paramsUpdateBlockSLADetails = array($policyName, $remainingText, $remainingHours, $statusBlockSLADetails, $timeElapsedText, $timeElapsedHours, $recordId);
+                    $adb->pquery($queryUpdateBlockSLADetails, $paramsUpdateBlockSLADetails);
+                    // END - Update field value Block SLA Details for Modules Selected
+                    $alertNameSLALog = $statusBlockSLADetails . " ($checkExcludeFieldValue)";
+                }
+                createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,$statusBlockSLADetails,$entityInstance);
+                // Update Complete Records
+                $adb->pquery('UPDATE vte_sla_related_rel SET complete = 1 WHERE slaid = ? AND crmid = ?',array($slaId,$recordId));
+                continue;
+            }
+            $countTimeSeconds = $currentTime - strtotime($timeCalculate);
+            $recordSLACountTime = $recordSLACountTime + $countTimeSeconds;
+            if($recordSLAStatus == 'Time Left') {
+                if($recordSLACountTime < $convertResolvedTime){
+                    if($recordSLACountTime >= $convertResolvedTime){
+                        $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                        $remainingText = convertTimeToText($remainingSeconds);
+                        $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                        $timeElapsedSeconds = $convertResolvedTime;
+                        $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                        $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                        $statusBlockSLADetails = 'Violated';
+                    }else{
+                        $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                        $remainingText = convertTimeToText($remainingSeconds);
+                        $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                        $timeElapsedSeconds = $recordSLACountTime;
+                        $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                        $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                        $statusBlockSLADetails = 'Time Left';
+                    }
+                }else{
+                    $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                    $remainingText = convertTimeToText($remainingSeconds);
+                    $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                    $timeElapsedSeconds = $recordSLACountTime;
+                    $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                    $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                    $statusBlockSLADetails = 'Violated';
+                }
+                if($statusBlockSLADetails == 'Violated'){
+                    $updateStatus = true;
+                }
+            }else{
+                $remainingSeconds = $convertResolvedTime - $recordSLACountTime;
+                $remainingText = convertTimeToText($remainingSeconds);
+                $remainingHours = round($remainingSeconds / 60 / 60, 2);
+                $timeElapsedSeconds = $recordSLACountTime;
+                $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+                $timeElapsedHours = round($timeElapsedSeconds / 60 / 60, 2);
+                $statusBlockSLADetails = 'Violated';
+            }
+
+            // BEGIN - Update field value Block SLA Details for Modules Selected
+            $queryUpdateBlockSLADetails = "UPDATE {$entityInstance->table_name} SET ";
+            $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_name' . "= ?,";
+            $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain' . "= ?,";
+            $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_remain_h' . "= ?,";
+            $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_status' . "= ?,";
+            $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed' . "= ?,";
+            $queryUpdateBlockSLADetails .= strtolower($moduleName) . '_sla_elapsed_h' . "= ?";
+            $queryUpdateBlockSLADetails .= " WHERE {$entityInstance->table_index} = ?";
+            $paramsUpdateBlockSLADetails = array($policyName, $remainingText, $remainingHours, $statusBlockSLADetails, $timeElapsedText, $timeElapsedHours, $recordId);
+            $adb->pquery($queryUpdateBlockSLADetails, $paramsUpdateBlockSLADetails);
+            // END - Update field value Block SLA Details for Modules Selected
+            $alertNameSLALog = 'Update Status(Violated)';
+            if($updateStatus == true){
+                createSLALog($slaId,$recordId,$policyName,$alertNameSLALog,$statusBlockSLADetails,$entityInstance);
+            }
+            //Update Status for rel SLA
+            $adb->pquery('UPDATE vte_sla_related_rel SET time_changeon = ?, count_time_seconds = ?, status = ? WHERE crmid = ? AND slaid = ?',array(date('Y-m-d H:i:s',$currentTime),$recordSLACountTime,$statusBlockSLADetails,$recordId,$slaId));
+
+            if($statusBlockSLADetails == 'Time Left' || $statusBlockSLADetails == 'Violated'){
+                // get records do not perform SLA Action on SLA
+                foreach ($slaActions as $key => $slaAction) {
+                    $user = $slaAction['user'];
+                    $slaActionId = $slaAction['id'];
+                    $slaActionName = $slaAction['name'];
+                    $type = $slaAction['type'];
+                    $trigger = $slaAction['trigger'];
+                    $trigger_time = $slaAction['trigger_time'];
+                    $trigger_typetime = $slaAction['trigger_typetime'];
+                    $userIdOrGroupId = $slaAction['user'];
+                    $typeId = $slaAction['type_id'];
+                    $convertTriggerTime = $slaAction['convertTriggerTime'];
+                    $rsRecordsRelatedSLAAction = $adb->pquery('SELECT * FROM vte_sla_actions_records WHERE slaid = ? AND crmid = ? AND sla_actionsid = ?', array($slaId, $recordId,$slaActionId));
+                    if($adb->num_rows($rsRecordsRelatedSLAAction) == 0){
+                        $slaActionRecordsCountTimeSeconds = $currentTime - strtotime($timeCalculate);
+                        $paramsInsertSLAActionRecords = array($slaId,$slaActionId,$recordId,$type,$slaActionRecordsCountTimeSeconds,0);
+                        $adb->pquery('INSERT INTO vte_sla_actions_records(slaid,sla_actionsid,crmid,type,sla_action_count_time,sla_action_status) VALUES(?,?,?,?,?,?)',$paramsInsertSLAActionRecords);
+                    }else{
+                        $slaActionRecordsStatus = $adb->query_result($rsRecordsRelatedSLAAction,0,'sla_action_status');
+                        if($slaActionRecordsStatus == 1){
+                            continue;
+                        }
+                        $slaActionRecordsCountTimeSeconds = $adb->query_result($rsRecordsRelatedSLAAction,0,'sla_action_count_time');
+                        if(!$slaActionRecordsCountTimeSeconds){
+                            $slaActionRecordsCountTimeSeconds = 0;
+                        }
+                        $slaActionRecordsCountTimeSeconds = $slaActionRecordsCountTimeSeconds + ($currentTime - strtotime($timeCalculate));
+                    }
+                    $adb->pquery('UPDATE vte_sla_actions_records SET sla_action_count_time = ? WHERE slaid = ? AND sla_actionsid = ? AND crmid = ?',array($slaActionRecordsCountTimeSeconds,$slaId,$slaActionId,$recordId));
+
+                    if ($trigger == 'Before') {
+                        $timeAction = $convertResolvedTime - $convertTriggerTime;
+                    } else {
+                        $timeAction = $convertResolvedTime + $convertTriggerTime;
+                    }
+
+                    if($slaActionRecordsCountTimeSeconds >= $timeAction){
+                        if ($type == 'Email') {
+                            // get Emails
+                            $toEmails = array();
+                            if($userIdOrGroupId == ''){
+                                $userIdOrGroupId = $rowRecord['smownerid'];
+                            }
+                            $rsUsers = $adb->pquery('SELECT * FROM vtiger_users WHERE id = ?', array($userIdOrGroupId));
+                            $numrowsUsers = $adb->num_rows($rsUsers);
+                            if ($numrowsUsers == 0) {
+                                $rsGroups = $adb->pquery('SELECT * FROM vtiger_users2group INNER JOIN vtiger_users ON vtiger_users2group.userid = vtiger_users.id WHERE groupid =?', array($userIdOrGroupId));
+                                $numrowGroups = $adb->num_rows($rsGroups);
+                                for ($i = 0; $i < $numrowGroups; $i++) {
+                                    $toEmails[$i] = $adb->query_result($rsGroups, $i, 'email1');
+                                }
+                            } else {
+                                $toEmails[] = $adb->query_result($rsUsers, 0, 'email1');
+                            }
+                            // Send Mail
+                            $status = sendMail($rowRecord, $typeId, $toEmails);
+                        } elseif ($type == 'Workflow') {
+                            $status = workflows($util, $admin, $moduleName, $recordId, $typeId);
+                        } else {
+                            $assignTo = $user;
+                            $status = reassign($recordId, $userIdOrGroupId);
+                        }
+                        if ($status) {
+                            $time = date('Y-m-d H:i:s', $currentTime);
+                            $adb->pquery('UPDATE vte_sla_actions_records SET `time` = ?, sla_action_status = 1 WHERE slaid =? AND crmid = ? AND sla_actionsid = ?',array($time,$slaId,$recordId,$slaActionId));
+                            $triggerText = "$trigger_time $trigger_typetime $trigger Resolution";
+                            createSLALogSLAAction($slaId,$recordId,$policyName,$slaActionName,$statusBlockSLADetails,$type,$triggerText,$assignTo,$entityInstance);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+function sendMail($rowRecord,$templateId,$emails)
+{
+    global $adb,$current_user;
+    // save record Email
+    $recordId= $rowRecord['crmid'];
+    $assignTo= $rowRecord['smownerid'];
+    $rsTemplateEmail = $adb->pquery('SELECT * FROM vtiger_emailtemplates WHERE templateid = ?', array($templateId));
+    $subject = $adb->query_result($rsTemplateEmail, 0, 'subject');
+    $content = $adb->query_result($rsTemplateEmail, 0, 'body');
+    if (is_array($emails)) {
+        $toEmails = implode(',', $emails);
+    }
+    $flag = 'SENT';
+    $userId = $current_user->id;
+    $parentIds = $recordId . ' @ ' . $userId . '|';
+    $recordModel = Vtiger_Record_Model::getCleanInstance('Emails');
+    $recordModel->set('mode', '');
+    $processedContent = Emails_Mailer_Model::getProcessedContent($content); // To remove script tags
+    $mailerInstance = Emails_Mailer_Model::getInstance();
+    $processedContentWithURLS = decode_html($mailerInstance->convertToValidURL($processedContent));
+    $recordModel->set('description', $processedContentWithURLS);
+    $recordModel->set('subject', $subject);
+    $recordModel->set('saved_toid', $toEmails);
+    $recordModel->set('assigned_user_id', $current_user->id);
+    $recordModel->set('email_flag', $flag);
+    $recordModel->set('parent_id', $parentIds);
+    $recordModel->set('assigned_user_id', $assignTo);
+    $recordModel->save();
+
+    // To add entry in ModTracker for email relation
+    $emailId = $recordModel->getId();
+    $relatedModule = $recordModel->getEntityType($recordId);
+    if (!empty($relatedModule) && $relatedModule != 'Users') {
+        $relatedModuleModel = Vtiger_Module_Model::getInstance($relatedModule);
+        $relationModel = Vtiger_Relation_Model::getInstance($relatedModuleModel, $recordModel->getModule());
+        if ($relationModel) {
+            $relationModel->addRelation($recordId, $emailId);
+        }
+    }
+
+    // Send Mail
+    $mailer = Emails_Mailer_Model::getInstance();
+    $mailer->IsHTML(true);
+
+    $fromEmail = $recordModel->getFromEmailAddress();
+    $replyTo = $recordModel->getReplyToEmail();
+    $userName = $current_user->first_name ? $current_user->first_name . ' '. $current_user->last_name : $current_user->last_name ;
+
+    $mergedDescription = getMergedDescription($recordModel->get('description'), $current_user->id, 'Users');
+    $mergedSubject = getMergedDescription($recordModel->get('subject'), $current_user->id, 'Users');
+    $inReplyToMessageId = '';
+    $generatedMessageId = '';
+    $mailer->reinitialize();
+    $mailer->ConfigSenderInfo($fromEmail, $userName, $replyTo);
+    $old_mod_strings = vglobal('mod_strings');
+    $description = $recordModel->get('description');
+    $subject = $recordModel->get('subject');
+    $parentModule = $recordModel->getEntityType($recordId);
+    if ($parentModule) {
+        $currentLanguage = Vtiger_Language_Handler::getLanguage();
+        $moduleLanguageStrings = Vtiger_Language_Handler::getModuleStringsFromFile($currentLanguage, $parentModule);
+        vglobal('mod_strings', $moduleLanguageStrings['languageStrings']);
+        $mergedDescriptionWithHyperLinkConversion = $recordModel->replaceBrowserMergeTagWithValue($mergedDescription, $parentModule, $recordId);
+        if ($parentModule != 'Users') {
+            //Retrieve MessageID from Mailroom table only if module is not users
+            $inReplyToMessageId = $mailer->retrieveMessageIdFromMailroom($recordId);
+
+            $generatedMessageId = $mailer->generateMessageID();
+            //If there is no reference id exist in crm.
+            //Generate messageId for sending email and attach to mailer header
+            if (empty($inReplyToMessageId)) {
+                $inReplyToMessageId = $generatedMessageId;
+            }
+            // Apply merge for non-Users module merge tags.
+            $description = getMergedDescription($mergedDescriptionWithHyperLinkConversion, $recordId, $parentModule);
+            $subject = getMergedDescription($mergedSubject, $recordId, $parentModule);
+        } else {
+            // Re-merge the description for user tags based on actual user.
+            $description = getMergedDescription($mergedDescriptionWithHyperLinkConversion, $recordId, 'Users');
+            $subject = getMergedDescription($mergedSubject, $recordId, 'Users');
+            vglobal('mod_strings', $old_mod_strings);
+        }
+    }
+    //If variable is not empty then add custom header
+    if(!empty($inReplyToMessageId)){
+        $mailer->AddCustomHeader("In-Reply-To", $inReplyToMessageId);
+    }
+
+    if(!empty($generatedMessageId)){
+        $mailer->MessageID = $generatedMessageId;
+    }
+
+    if (strpos($description, '$logo$')) {
+        $description = str_replace('$logo$',"<img src='cid:companyLogo' />", $description);
+        $logo = true;
+    }
+
+    $mailer->Body = $description;
+    if ($parentModule) {
+        $mailer->Body = $recordModel->convertUrlsToTrackUrls($mailer->Body, $recordId);;
+        $mailer->Body .= $recordModel->getTrackImageDetails($recordId, $recordModel->isEmailTrackEnabled($parentModule));
+    }
+    //Checking whether user requested to add signature or not
+    $mailer->Subject = decode_html(strip_tags($subject));
+    $plainBody = decode_emptyspace_html($description);
+    $plainBody = preg_replace(array("/<p>/i", "/<br>/i", "/<br \/>/i"), array("\n", "\n", "\n"), $plainBody);
+    $plainBody .= "\n\n" . $current_user->signature;
+    $plainBody = strip_tags($plainBody);
+    $plainBody = Emails_Mailer_Model::convertToAscii($plainBody);
+    $plainBody = $recordModel->convertUrlsToTrackUrls($plainBody, $recordId, 'plain');
+    $mailer->AltBody = $plainBody;
+    foreach ($emails as $key => $email) {
+        $email = trim($email);
+        $mailer->AddAddress($email);
+    }
+
+    if ($logo) {
+        $companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
+        $companyLogoDetails = $companyDetails->getLogo();
+        //While sending email template and which has '$logo$' then it should replace with company logo
+        $mailer->AddEmbeddedImage($companyLogoDetails->get('imagepath'), 'companyLogo', 'attachment', 'base64', 'image/jpg');
+    }
+    $mailer->Body = Emails_Mailer_Model::convertCssToInline($mailer->Body);
+    $mailer->Body = Emails_Mailer_Model::makeImageURLValid($mailer->Body);
+
+    $status = $mailer->Send(true);
+    if (!$status) {
+        $status = $mailer->getError();
+        //If mailer error, then update emailflag as saved
+        if ($status) {
+            $recordModel->updateEmailFlag();
+        }
+    } else {
+        //If mail sending is success store message Id for given crmId
+        if ($generatedMessageId && $recordId) {
+            $mailer->updateMessageIdByCrmId($generatedMessageId, $recordId);
+        }
+
+        $mailString = $mailer->getMailString();
+        $mailBoxModel = MailManager_Mailbox_Model::activeInstance();
+        $folderName = $mailBoxModel->folder();
+        if (!empty($folderName) && !empty($mailString)) {
+            $connector = MailManager_Connector_Connector::connectorWithModel($mailBoxModel, '');
+            $message = str_replace("\n", "\r\n", $mailString);
+            if (function_exists('mb_convert_encoding')) {
+                $folderName = mb_convert_encoding($folderName, "UTF7-IMAP", "UTF-8");
+            }
+            imap_append($connector->mBox, $connector->mBoxUrl . $folderName, $message, "\\Seen");
+        }
+    }
+    return $status;
+}
+
+function reassign($recordId,$userId){
+    $recordModel = Vtiger_Record_Model::getInstanceById($recordId);
+    $recordModel->set('id', $recordId);
+    $recordModel->set('mode', 'edit');
+    $recordModel->set('assigned_user_id',$userId);
+    $recordModel->save();
+    $status = true;
+    return $status;
+}
+
+function workflows($util,$user,$moduleName,$recordId,$workflowId){
+    global $adb;
+    $moduleInstance = CRMEntity::getInstance($moduleName);
+    $moduleInstance->retrieve_entity_info($recordId, $moduleName);
+    $moduleInstance->id = $recordId;
+    $entityData = VTEntityData::fromCRMEntity($moduleInstance);
+    $entityCache = new VTEntityCache($user);
+    $wsModuleName = $util->toWSModuleName($entityData);
+    $wsId = vtws_getWebserviceEntityId($wsModuleName, $entityData->getId());
+    $entityData = $entityCache->forId($wsId);
+    require_once('modules/com_vtiger_workflow/VTTaskManager.inc');
+
+    $tm = new VTTaskManager($adb);
+    $tasks = $tm->getTasksForWorkflow($workflowId);
+    foreach($tasks as $task){
+        $task->doTask($entityData);
+    }
+
+    return true;
+}
+
+function convertTimeToText($seconds){
+    $dtF = new \DateTime('@0');
+    $dtT = new \DateTime("@$seconds");
+    $timeCalculateObj = $dtF->diff($dtT);
+    if($seconds < 0){
+        if($timeCalculateObj->d > 2) {
+            if($timeCalculateObj->i > 1){
+                $timeConvertText = $timeCalculateObj->format('- %a days %h hours %i Minutes');
+            }else{
+                $timeConvertText = $timeCalculateObj->format('- %a days %h hours %i Minute');
+            }
+        }else{
+            if($timeCalculateObj->i > 1){
+                $timeConvertText = $timeCalculateObj->format('- %a day %h hours %i Minutes');
+            }else{
+                $timeConvertText = $timeCalculateObj->format('- %a day %h hours %i Minute');
+            }
+        }
+    }else{
+        if($timeCalculateObj->d > 2) {
+            if($timeCalculateObj->i > 1){
+                $timeConvertText = $timeCalculateObj->format('%a days %h hours %i Minutes');
+            }else{
+                $timeConvertText = $timeCalculateObj->format('%a days %h hours %i Minute');
+            }
+        }else{
+            if($timeCalculateObj->i > 1){
+                $timeConvertText = $timeCalculateObj->format('%a day %h hours %i Minutes');
+            }else{
+                $timeConvertText = $timeCalculateObj->format('%a day %h hours %i Minute');
+            }
+        }
+    }
+    return $timeConvertText;
+}
+
+function createSLALogFirstTime($slaId,$recordId,$policyName,$actionName,$status,$timeRemainSeconds,$timeElapsedSeconds=0){
+    global $adb;
+    $checkSLALogFirstTime = $adb->pquery('SELECT * FROM vte_sla_log WHERE slaid = ? AND related_to = ?',array($slaId,$recordId));
+    if($adb->num_rows($checkSLALogFirstTime) == 0){
+        $recordModelSLALog = Vtiger_Record_Model::getCleanInstance('VTESLALog');
+        $recordModelSLALog->set('mode', '');
+        $recordModelSLALog->set('policy_id', $slaId);
+        $recordModelSLALog->set('related_to', $recordId);
+        $recordModelSLALog->set('policy_name', $policyName);
+        $recordModelSLALog->set('sla_action_name', $actionName);
+        $recordModelSLALog->set('sla_log_status', $status);
+        $timeElapsedText = convertTimeToText($timeElapsedSeconds);
+        $timeRemainText = convertTimeToText($timeRemainSeconds);
+        $recordModelSLALog->set('sla_time_elapsed', $timeElapsedText);
+        $recordModelSLALog->set('sla_time_remaining', $timeRemainText);
+        $recordModelSLALog->save();
+    }
+}
+
+function createSLALogSLAAction($slaId,$recordId,$policyName,$actionName,$status='',$type = '', $triggerText = '', $assignTo = '',$entityInstance = false){
+    global $adb;
+    $checkSLALogFirstTime = $adb->pquery('SELECT * FROM vte_sla_log WHERE slaid = ? AND related_to = ? AND sla_action_name = ?',array($slaId,$recordId,$actionName));
+    if($adb->num_rows($checkSLALogFirstTime) == 0){
+        $recordModelSLALog = Vtiger_Record_Model::getCleanInstance('VTESLALog');
+        $recordModelSLALog->set('mode', '');
+        $recordModelSLALog->set('policy_id', $slaId);
+        $recordModelSLALog->set('related_to', $recordId);
+        $recordModelSLALog->set('policy_name', $policyName);
+        $recordModelSLALog->set('sla_action_name', $actionName);
+        $recordModelSLALog->set('sla_action_type', $type);
+        $recordModelSLALog->set('sla_action_trigger', $triggerText);
+        $recordModelSLALog->set('assigned_user_id', $assignTo);
+        $recordModelSLALog->set('sla_log_status', $status);
+
+        if($entityInstance != false){
+            $table = $entityInstance->table_name;
+            $table_index = $entityInstance->table_index;
+            $rsTime = $adb->pquery("SELECT * FROM $table WHERE $table_index = ?",array($recordId));
+            $timeElapsed = $adb->query_result($rsTime,0,strtolower($entityInstance->moduleName).'_sla_elapsed');
+            $timeRemain = $adb->query_result($rsTime,0,strtolower($entityInstance->moduleName).'_sla_remain');
+            $recordModelSLALog->set('sla_time_elapsed', $timeElapsed);
+            $recordModelSLALog->set('sla_time_remaining', $timeRemain);
+        }
+        $recordModelSLALog->save();
+    }
+}
+
+function createSLALog($slaId,$recordId,$policyName,$actionName,$status='',$entityInstance = false){
+    global $adb;
+    $checkPaused = $adb->pquery('SELECT * FROM vte_sla_log WHERE slaid = ? AND related_to = ? ORDER BY vte_sla_logid DESC',array($slaId,$recordId));
+    $lastVTESLALog = $adb->query_result($checkPaused,'0','sla_action_name');
+    if($lastVTESLALog == $actionName){
+        return;
+    }
+    $recordModelSLALog = Vtiger_Record_Model::getCleanInstance('VTESLALog');
+    $recordModelSLALog->set('mode', '');
+    $recordModelSLALog->set('policy_id', $slaId);
+    $recordModelSLALog->set('related_to', $recordId);
+    $recordModelSLALog->set('policy_name', $policyName);
+    $recordModelSLALog->set('sla_action_name', $actionName);
+    if($entityInstance != false){
+        $table = $entityInstance->table_name;
+        $table_index = $entityInstance->table_index;
+        $rsSLABLockDetails = $adb->pquery("SELECT * FROM $table WHERE $table_index = ?",array($recordId));
+        $timeElapsed = $adb->query_result($rsSLABLockDetails,0,strtolower($entityInstance->moduleName).'_sla_elapsed');
+        $timeRemain = $adb->query_result($rsSLABLockDetails,0,strtolower($entityInstance->moduleName).'_sla_remain');
+        $recordModelSLALog->set('sla_time_elapsed', $timeElapsed);
+        $recordModelSLALog->set('sla_time_remaining', $timeRemain);
+        if($status == ''){
+            $status = $adb->query_result($rsSLABLockDetails,0,strtolower($entityInstance->moduleName).'_sla_status');
+        }
+    }
+    $recordModelSLALog->set('sla_log_status', $status);
+    $recordModelSLALog->save();
+}
+
+function handleChangeFieldPicklist($slaId,$recordId,$picklistField,$picklistValue){
+    global $adb;
+    $query = "SELECT b.* FROM vtiger_modtracker_basic a
+                INNER JOIN vtiger_modtracker_detail b ON a.id = b.id
+                WHERE a.crmid = ? AND b.fieldname = ?
+                ORDER BY a.id DESC";
+    $rsCheckFieldPickListChange = $adb->pquery($query,array($recordId,$picklistField));
+    $prevalue = $adb->query_result($rsCheckFieldPickListChange,0,'prevalue');
+    $postvalue = $adb->query_result($rsCheckFieldPickListChange,0,'postvalue');
+    if(!$prevalue){
+        return true;
+    }else{
+        if($postvalue == $picklistValue){
+            $adb->pquery('DELETE FROM vte_sla_related_rel WHERE crmid = ? AND slaid <> ?',array($recordId,$slaId));
+            return true;
+        }else{
+            $rsSLAPolicy = $adb->pquery('SELECT slaid FROM vte_sla_policies WHERE picklist_field = ? AND picklist_value = ?',array($picklistField,$picklistValue));
+            $slaId = $adb->query_result($rsSLAPolicy,0,'slaid');
+            $adb->pquery('DELETE FROM vte_sla_related_rel WHERE crmid = ? AND slaid <> ?',array($recordId,$slaId));
+        }
+    }
+    return false;
+}
+
+function ConvertTimeZone($datetime,$timezone = null){
+    global $default_timezone;
+    if(!$timezone){
+        $timezone = $default_timezone;
+    }
+    $datetime = new DateTime($datetime);
+    $datetime->setTimezone(new DateTimeZone($timezone));
+    return $datetime->format('Y-m-d H:i:s');
+}

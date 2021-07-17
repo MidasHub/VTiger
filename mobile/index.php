@@ -1,0 +1,1 @@
+<?php chdir("../"); require_once "config.inc.php"; header("Location: ".$site_URL."modules/VTEMobile"); ?>

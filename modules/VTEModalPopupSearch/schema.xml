@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+				`module`  varchar(50) NOT NULL ,
+				`valid`  int(1) NULL ,
+				PRIMARY KEY (`module`));]]></sql>
+		</table>
+		<table>
+			<name>vte_modalpopupsearch_settings</name>
+			<sql><![CDATA[CREATE TABLE `vte_modalpopupsearch_settings` (
+				  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+				  `module` varchar(100) DEFAULT NULL,
+				  `field_name` varchar(4000) DEFAULT NULL,
+				  `active` int(1) DEFAULT '1',
+				  `conditions` text,
+				  `conditions_count` int(10) DEFAULT NULL,
+				  `module_field` varchar(100) DEFAULT NULL,
+				  PRIMARY KEY (`id`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_modalpopupsearch_settings</name>
+			<sql><![CDATA[ALTER TABLE `vte_modalpopupsearch_settings`
+			ADD COLUMN `active_query`  int(3) NULL ,
+			ADD COLUMN `advanced_query`  text NULL ;]]></sql>
+		</table>
+		<table>
+			<name>vte_modalpopupsearch_settings</name>
+			<sql><![CDATA[ALTER TABLE `vte_modalpopupsearch_settings`
+			ADD COLUMN `message`  text NULL ,
+			ADD COLUMN `enable_override`  int(3) ]]></sql>
+		</table>
+		<table>
+			<name>vte_modalpopupsearch_settings</name>
+			<sql><![CDATA[ALTER TABLE `vte_modalpopupsearch_settings`
+			ADD COLUMN `field_sort`  VARCHAR(255) NULL ,
+			ADD COLUMN `sort_by`  VARCHAR(255) NULL ;]]></sql>
+		</table>
+	</tables>
+</schema>

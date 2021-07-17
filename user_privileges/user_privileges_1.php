@@ -1,0 +1,9 @@
+<?php
+
+
+//This is the access privilege file
+$is_admin=true;
+
+$user_info=array('user_name'=>'admin','is_admin'=>'on','user_password'=>'$2y$10$lRsFUWj4CuDXA1I9kgQJp.Vyi9a7vhvfnXIzAjmTFo.J77SXN3mGu','confirm_password'=>'$2y$10$sYN/wDxte2QrXTNuORT9P.LrJMhxDkpbx4y/3ex.4d5BssFW1af3W','first_name'=>'Minh','last_name'=>'Administrator','roleid'=>'H2','email1'=>'nc.1102@gmail.com','status'=>'Active','activity_view'=>'This Week','lead_view'=>'Today','hour_format'=>'12','end_hour'=>'23:00','start_hour'=>'00:00','is_owner'=>'1','title'=>'','phone_work'=>'','department'=>'','phone_mobile'=>'','reports_to_id'=>'','phone_other'=>'','email2'=>'','phone_fax'=>'','secondaryemail'=>'','phone_home'=>'','date_format'=>'dd-mm-yyyy','signature'=>'','description'=>'','address_street'=>'','address_city'=>'','address_state'=>'','address_postalcode'=>'','address_country'=>'','accesskey'=>'tphMzTyYf0LBA7Nz','time_zone'=>'Asia/Bangkok','currency_id'=>'1','currency_grouping_pattern'=>'123,456,789','currency_decimal_separator'=>'.','currency_grouping_separator'=>',','currency_symbol_placement'=>'$1.0','imagename'=>'','internal_mailer'=>'1','theme'=>'alphagrey','language'=>'en_us','reminder_interval'=>'1 Minute','phone_crm_extension'=>'','no_of_currency_decimals'=>'2','truncate_trailing_zeros'=>'1','dayoftheweek'=>'Sunday','callduration'=>'5','othereventduration'=>'5','calendarsharedtype'=>'public','default_record_view'=>'Summary','leftpanelhide'=>'0','rowheight'=>'','defaulteventstatus'=>'Planned','defaultactivitytype'=>'Call','hidecompletedevents'=>'0','defaultcalendarview'=>'MyCalendar','defaultlandingpage'=>'Home','userlabel'=>'Minh Administrator','cf_users_round_robin_status'=>'','currency_name'=>'Vietnam, Dong','currency_code'=>'VND','currency_symbol'=>'₫','conv_rate'=>'1.00000','record_id'=>'','record_module'=>'','id'=>'1');
+
+?>

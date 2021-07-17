@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+				`module`  varchar(50) NOT NULL ,
+				`valid`  int(1) NULL ,
+				PRIMARY KEY (`module`));]]></sql>
+		</table>
+		<table>
+			<name>vte_predictivefield</name>
+			<sql><![CDATA[CREATE TABLE `vte_predictivefield` (
+					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					  `module` varchar(100) DEFAULT NULL,
+					  `last_x_days` int(3) NOT NULL,
+					  `active` int(1) DEFAULT 1,
+					  PRIMARY KEY (`id`)
+					) DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_predictivefield_predictions</name>
+			<sql><![CDATA[CREATE TABLE `vte_predictivefield_predictions` (
+					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					  `predictivefield_id` int(10) NOT NULL,
+					  `field_name` varchar(100) DEFAULT NULL,
+					  `field_label` varchar(200) DEFAULT NULL,
+					  `field_type` varchar(100) DEFAULT NULL,
+					  `prevalue` varchar(255) DEFAULT NULL,
+					  `postvalue1` varchar(255) DEFAULT NULL,
+					  `postvalue2` varchar(255) DEFAULT NULL,
+					  `postvalue3` varchar(255) DEFAULT NULL,
+					  `postvalue4` varchar(255) DEFAULT NULL,
+					  `date_analyzed` datetime DEFAULT NULL,
+					  PRIMARY KEY (`id`)
+					) DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_predictivefield_predictions</name>
+			<sql><![CDATA[ALTER TABLE `vte_predictivefield_predictions`
+					ADD COLUMN `dont_show_if_older_than`  int(10) NULL ,
+					ADD COLUMN `only_on_create`  int(3) NULL ,
+					ADD COLUMN `only_if_blank`  int(3) NULL ;]]></sql>
+		</table>
+	</tables>
+</schema>

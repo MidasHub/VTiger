@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vte_roundrobin</name>
+			<sql><![CDATA[CREATE TABLE `vte_roundrobin` (
+				  `roundrobinid` int(19) NOT NULL AUTO_INCREMENT,
+				  `rr_name` varchar(255) NOT NULL,
+				  `rr_module` varchar(255),
+				  `rr_status_field` varchar(255),
+				  `rr_unassigned_status` varchar(255),
+				  `rr_assigned_status` varchar(255),
+				  `rr_online_users_only` int(11),
+				  `rr_assigment_type` varchar(25),
+				  `rr_members` varchar(255),
+				  `rr_status` varchar(255),
+				  PRIMARY KEY (`roundrobinid`),
+				  INDEX(`roundrobinid`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_roundrobin_assigments</name>
+			<sql><![CDATA[CREATE TABLE `vte_roundrobin_assigments` (
+				  `rr_assigmentid` int(19) NOT NULL AUTO_INCREMENT,
+				  `roundrobinid` int(19) NOT NULL,
+				  `rr_assigned_user` int(19) NOT NULL,
+				  `rr_assigned_user_time` datetime,
+				  `rr_record_id` int(19) NOT NULL,
+				  PRIMARY KEY (`rr_assigmentid`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_roundrobin_settings</name>
+			<sql><![CDATA[CREATE TABLE `vte_roundrobin_settings` (
+				`enable`  int(3) NULL DEFAULT NULL
+				)]]></sql>
+		</table>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+                `module`  varchar(50) NOT NULL ,
+                `valid`  int(1) NULL ,
+                PRIMARY KEY (`module`));]]></sql>
+		</table>
+		<table>
+			<name>vte_roundrobin</name>
+			<sql><![CDATA[ALTER TABLE `vte_roundrobin`
+				ADD COLUMN `rr_assign_preferred_user`  int(10) NULL AFTER `rr_status`;]]></sql>
+		</table>
+		<table>
+			<name>vte_roundrobin_assigments</name>
+			<sql><![CDATA[ALTER TABLE `vte_roundrobin_assigments`
+				ADD INDEX `roundrobinid_index` (`roundrobinid`) USING BTREE ,
+				ADD INDEX `rr_assigned_user_index` (`rr_assigned_user`) USING BTREE ,
+				ADD INDEX `rr_assigned_user_time_index` (`rr_assigned_user_time`) USING BTREE ,
+				ADD INDEX `rr_record_id_index` (`rr_record_id`) USING BTREE ;]]></sql>
+		</table>
+	</tables>
+</schema>

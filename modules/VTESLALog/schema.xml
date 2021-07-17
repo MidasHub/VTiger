@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vte_sla_log</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_log` (
+				  `vte_sla_logid` int(19) NOT NULL,
+				  `slaid` int(19),
+				  `related_to` varchar(255),
+				  `status` varchar(100),
+				  `policy_name` varchar(255),
+				  `sla_action_name` varchar(255),
+				  `sla_action_trigger` varchar(255),
+				  `sla_action_type` varchar(255),
+				  `sla_time_elapsed` varchar(255),
+				  `sla_time_remaining` varchar(255),
+				  PRIMARY KEY(`vte_sla_logid`),
+				  INDEX(`vte_sla_logid`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_logcf</name>
+			<sql><![CDATA[CREATE TABLE `vte_sla_logcf` (
+				  `vte_sla_logid` int(19) NOT NULL,
+				  PRIMARY KEY (`vte_sla_logid`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vtiger_vteslalog_user_field</name>
+			<sql><![CDATA[CREATE TABLE IF NOT EXISTS `vtiger_vteslalog_user_field` (
+                  `recordid` int(25) NOT NULL,
+                  `userid` int(25) NOT NULL,
+                  `starred` varchar(100) DEFAULT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_log</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_log` ADD INDEX `related_to_index` (`related_to`) USING BTREE ;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_log</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_log`
+			CHANGE `related_to` `related_to` VARCHAR CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+			CHANGE `policy_name` `policy_name` VARCHAR CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+			CHANGE `sla_action_name` `sla_action_name` VARCHAR CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+			CHANGE `sla_action_trigger` `sla_action_trigger` VARCHAR CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+			CHANGE `sla_action_type` `sla_action_type` VARCHAR CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_log</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_log` MODIFY `related_to` INT(19) ;]]></sql>
+		</table>
+		<table>
+			<name>vte_sla_log</name>
+			<sql><![CDATA[ALTER TABLE `vte_sla_log` ADD INDEX `related_to_index` (`related_to`) USING BTREE ;]]></sql>
+		</table>
+		<table>
+			<name>vte_modules</name>
+			<sql><![CDATA[CREATE TABLE `vte_modules` (
+                `module`  varchar(50) NOT NULL ,
+                `valid`  int(1) NULL ,
+                PRIMARY KEY (`module`));]]></sql>
+		</table>
+	</tables>
+</schema>

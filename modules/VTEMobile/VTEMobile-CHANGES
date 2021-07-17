@@ -1,0 +1,15 @@
+MOBILE MODULE IS NOW PART OF STANDARD PRODUCT.
+
+Vtiger CRM 6.4.0 
+================
+
+1. Introduces APIV2 to enable extension of API set
+and retain the backward compatability to earlier version (consumed by VTEMobile Devices).
+
+* api.php has been refactored to load api.v1.php or api.v2.php
+
+
+2. Web UI enabled with multi-layout support (see VTEMobile.Config.php) - default layout ng added (based on AngularJS+API).
+
+* modules/VTEMobile/ui, modules/VTEMobile/resources, layouts/vlayout/modules/VTEMobile/generic - folders deleted.
+* modules/VTEMobile/html, layouts/vlayout/modules/VTEMobile/simple - folders added.
