@@ -784,7 +784,7 @@ $adb->pquery("CREATE TABLE IF NOT EXISTS vtiger_schedulereports(
             schannualdates VARCHAR(500),
             specificemails VARCHAR(500),
             next_trigger_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
-            ENGINE=InnoDB EFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", array());
+            ENGINE=InnoDB DEFAULT CHARSET=utf8;", array());
 
 Vtiger_Cron::register('ScheduleReports', 'cron/modules/Reports/ScheduleReports.service', 900);
 
@@ -1547,7 +1547,7 @@ Migration_Index_View::ExecuteQuery("CREATE TABLE IF NOT EXISTS vtiger_reporttype
                         data text,
 						PRIMARY KEY (`reportid`),
 						CONSTRAINT `fk_1_vtiger_reporttype` FOREIGN KEY (`reportid`) REFERENCES `vtiger_report` (`reportid`) ON DELETE CASCADE)
-                        ENGINE=InnoDB EFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", array()); 
+                        ENGINE=InnoDB DEFAULT CHARSET=utf8;", array()); 
 
 //Configuration Editor fix
 $sql = "UPDATE vtiger_settings_field SET name = ? WHERE name = ?";
