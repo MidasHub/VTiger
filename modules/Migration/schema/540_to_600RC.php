@@ -84,7 +84,7 @@ if(!defined('INSTALLATION_MODE')) {
 					templatepath varchar(255),
 					modules text(500),
 					sourcemodule varchar(255)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8", array());
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'", array());
 
 	$taskTypes = array();
 	$defaultModules = array('include' => array(), 'exclude'=>array());
@@ -114,7 +114,7 @@ Migration_Index_View::ExecuteQuery("CREATE TABLE IF NOT EXISTS vtiger_shorturls 
 					handler_data varchar(255) DEFAULT NULL,
 					PRIMARY KEY (id),
 					KEY uid (uid)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8", array());
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'", array());
 
 $moduleInstance = Vtiger_Module::getInstance('Potentials');
 $block = Vtiger_Block::getInstance('LBL_OPPORTUNITY_INFORMATION', $moduleInstance);
@@ -2502,4 +2502,4 @@ Migration_Index_View::ExecuteQuery("CREATE TABLE IF NOT EXISTS vtiger_faqcf (
                                 faqid int(19), 
                                 PRIMARY KEY (faqid), 
                                 CONSTRAINT fk_1_vtiger_faqcf FOREIGN KEY (faqid) REFERENCES vtiger_faq(id) ON DELETE CASCADE 
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8", array()); 
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'", array()); 
