@@ -193,7 +193,7 @@ class Vtiger_Utils {
 		if($suffixTableMeta !== false) {
 			if($suffixTableMeta === true) {
 				if($adb->isMySQL()) {
-					$suffixTableMeta = ' ENGINE=InnoDB DEFAULT CHARSET=utf8';
+					$suffixTableMeta = ' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
 				} else {
 					// TODO Handle other database types.
 				}
