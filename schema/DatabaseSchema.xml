@@ -108,7 +108,7 @@
 		<index name="user_user_password_idx">
 			<col>user_password</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_crmentity">
@@ -167,7 +167,7 @@
 			<col>deleted</col>
 			<col>setype</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_sharedcalendar">
@@ -177,7 +177,7 @@
 		<field name="sharedid" type="I" size="19">
 			<key />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tab">
@@ -224,7 +224,7 @@
 		<index name="tab_tabid_idx">
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_blocks">
@@ -267,12 +267,12 @@
 		<index name="block_tabid_idx">
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_blocks" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_blocks FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -341,12 +341,12 @@
 		<index name="field_displaytype_idx">
 			<col>displaytype</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_field" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_field FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -396,12 +396,12 @@
 		<index name="account_account_type_idx">
 			<col>account_type</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_account" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_account FOREIGN KEY (accountid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -418,12 +418,12 @@
 		<field name="bill_street" type="C" size="250" />
 		<field name="bill_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_accountbillads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_accountbillads FOREIGN KEY (accountaddressid) REFERENCES vtiger_account(accountid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -440,12 +440,12 @@
 		<field name="ship_pobox" type="C" size="30" />
 		<field name="ship_street" type="C" size="250" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_accountshipads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_accountshipads FOREIGN KEY (accountaddressid) REFERENCES vtiger_account(accountid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -456,12 +456,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_accountscf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_accountscf FOREIGN KEY (accountid) REFERENCES vtiger_account(accountid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -507,12 +507,12 @@
 		<index name="contactdetails_accountid_idx">
 			<col>accountid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_contactdetails" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_contactdetails FOREIGN KEY (contactid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -535,12 +535,12 @@
 		</field>
 		<field name="leadsource" type="C" size="200" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_contactsubdetails" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_contactsubdetails FOREIGN KEY (contactsubscriptionid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -563,12 +563,12 @@
 		<field name="otherstreet" type="C" size="250" />
 		<field name="otherpobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_contactaddress" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_contactaddress FOREIGN KEY (contactaddressid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -579,12 +579,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_contactscf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_contactscf FOREIGN KEY (contactid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -601,12 +601,12 @@
 		<field name="login_time" type="T" />
 		<field name="logout_time" type="T" />
 		<field name="isactive" type="I" size="1" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_portalinfo" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_portalinfo FOREIGN KEY (id) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -618,12 +618,12 @@
 		<field name="portal" type="C" size="3" />
 		<field name="support_start_date" type="D" />
 		<field name="support_end_date" type="D" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_customerdetails" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_customerdetails FOREIGN KEY (customerid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -685,12 +685,12 @@
 			<col>converted</col>
 			<col>leadstatus</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_leaddetails" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_leaddetails FOREIGN KEY (leadid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -711,12 +711,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_leadsubdetails" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_leadsubdetails FOREIGN KEY (leadsubscriptionid) REFERENCES vtiger_leaddetails(leadid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -739,12 +739,12 @@
 			<default value="Billing" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_leadaddress" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_leadaddress FOREIGN KEY (leadaddressid) REFERENCES vtiger_leaddetails(leadid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -755,12 +755,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_leadscf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_leadscf FOREIGN KEY (leadid) REFERENCES vtiger_leaddetails(leadid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -811,12 +811,12 @@
 		<index name="notes_crmid_idx">
 			<col>crmid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_notes" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_notes FOREIGN KEY (notesid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -879,12 +879,12 @@
 			<col>amount</col>
 			<col>sales_stage</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_potential" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_potential FOREIGN KEY (potentialid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -907,12 +907,12 @@
 		<index name="potstagehistory_potentialid_idx">
 			<col>potentialid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_potstagehistory" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_potstagehistory FOREIGN KEY (potentialid) REFERENCES vtiger_potential(potentialid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -923,12 +923,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_potentialscf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_potentialscf FOREIGN KEY (potentialid) REFERENCES vtiger_potential(potentialid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -994,12 +994,12 @@
 		<index name="activity_status_idx">
 			<col>status</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_activity" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_activity FOREIGN KEY (activityid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1019,12 +1019,12 @@
 		<index name="attachments_attachmentsid_idx">
 			<col>attachmentsid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_attachments" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_attachments FOREIGN KEY (attachmentsid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1049,13 +1049,13 @@
 			<col>attachmentsid</col>
 			<col>crmid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_seattachmentsrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_seattachmentsrel FOREIGN KEY (attachmentsid) REFERENCES vtiger_attachments(attachmentsid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_seattachmentsrel FOREIGN KEY (crmid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1070,7 +1070,7 @@
 		<field name="item_id" type="C" size="36" />
 		<field name="item_summary" type="C" size="255" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_vendor">
@@ -1097,12 +1097,12 @@
 		<field name="country" type="C" size="100" />
 		<field name="description" type="X" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_vendor" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_vendor FOREIGN KEY (vendorid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1158,12 +1158,12 @@
 		<field name="is_subproducts_viewable" type="I" size="1">
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_products" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_products FOREIGN KEY (productid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1189,7 +1189,7 @@
 			<unique />
 			<col>currency</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_visibility">
@@ -1213,7 +1213,7 @@
 			<col>visibility</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_manufacturer">
@@ -1237,7 +1237,7 @@
 			<unique />
 			<col>manufacturer</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_role">
@@ -1248,7 +1248,7 @@
 		<field name="parentrole" type="C" size="255" />
 		<field name="depth" type="I" size="19" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_user2role">
@@ -1262,13 +1262,13 @@
 		<index name="user2role_roleid_idx">
 			<col>roleid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_user2role" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_user2role FOREIGN KEY (roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_user2role FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1284,7 +1284,7 @@
 			<col>groupname</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_users2group">
@@ -1299,13 +1299,13 @@
 			<col>groupid</col>
 			<col>userid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_users2group" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_users2group FOREIGN KEY (groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_users2group FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1318,13 +1318,13 @@
 			<key />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_group2grouprel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_group2grouprel FOREIGN KEY (containsgroupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE ON UPDATE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_group2grouprel FOREIGN KEY (groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE ON UPDATE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1336,13 +1336,13 @@
 		<field name="roleid" type="C" size="255">
 			<key />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_group2role" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_group2role FOREIGN KEY (groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_group2role FOREIGN KEY (roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1354,13 +1354,13 @@
 		<field name="roleandsubid" type="C" size="255">
 			<key />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_group2rs" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_group2rs FOREIGN KEY (groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_group2rs FOREIGN KEY (roleandsubid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1402,7 +1402,7 @@
 		<index name="campaign_campaignid_idx">
 			<col>campaignid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_campaignscf">
@@ -1411,12 +1411,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_campaignscf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_campaignscf FOREIGN KEY (campaignid) REFERENCES vtiger_campaign(campaignid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1440,13 +1440,13 @@
 		<index name="campaigncontrel_contractid_idx">
 			<col>contactid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_campaigncontrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_campaigncontrel FOREIGN KEY (campaignid) REFERENCES vtiger_campaign(campaignid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_campaigncontrel FOREIGN KEY (contactid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1469,13 +1469,13 @@
 			<col>leadid</col>
 			<col>campaignid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_campaignleadrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_campaignleadrel FOREIGN KEY (campaignid) REFERENCES vtiger_campaign(campaignid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_campaignleadrel FOREIGN KEY (leadid) REFERENCES vtiger_leaddetails(leadid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1497,13 +1497,13 @@
 		<index name="contpotentialrel_contactid_idx">
 			<col>contactid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_contpotentialrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_contpotentialrel FOREIGN KEY (contactid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_contpotentialrel FOREIGN KEY (potentialid) REFERENCES vtiger_potential(potentialid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1525,13 +1525,13 @@
 		<index name="cntactivityrel_activityid_idx">
 			<col>activityid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_cntactivityrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_cntactivityrel FOREIGN KEY (activityid) REFERENCES vtiger_activity(activityid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_cntactivityrel FOREIGN KEY (contactid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1565,12 +1565,12 @@
 		<index name="troubletickets_status_idx">
 			<col>status</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_troubletickets" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_troubletickets FOREIGN KEY (ticketid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1595,12 +1595,12 @@
 		<index name="ticketcomments_ticketid_idx">
 			<col>ticketid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ticketcomments" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_ticketcomments FOREIGN KEY (ticketid) REFERENCES vtiger_troubletickets(ticketid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1621,13 +1621,13 @@
 		<index name="salesmanactivityrel_smid_idx">
 			<col>smid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salesmanactivityrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_salesmanactivityrel FOREIGN KEY (activityid) REFERENCES vtiger_activity(activityid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_salesmanactivityrel FOREIGN KEY (smid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1648,13 +1648,13 @@
 		<index name="vendorcontactrel_contact_idx">
 			<col>contactid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_vendorcontactrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_vendorcontactrel FOREIGN KEY (contactid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_vendorcontactrel FOREIGN KEY (vendorid) REFERENCES vtiger_vendor(vendorid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1675,13 +1675,13 @@
 		<index name="salesmanticketrel_id_idx">
 			<col>id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salesmanticketrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_salesmanticketrel FOREIGN KEY (id) REFERENCES vtiger_troubletickets(ticketid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_salesmanticketrel FOREIGN KEY (smid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1700,13 +1700,13 @@
 		<index name="seactivityrel_crmid_idx">
 			<col>crmid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_seactivityrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_seactivityrel FOREIGN KEY (activityid) REFERENCES vtiger_activity(activityid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_seactivityrel FOREIGN KEY (crmid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1733,13 +1733,13 @@
 		<index name="seproductrel_crmid_idx">
 			<col>crmid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_seproductsrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_seproductsrel FOREIGN KEY (crmid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_seproductsrel FOREIGN KEY (productid) REFERENCES vtiger_products(productid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1760,13 +1760,13 @@
 		<index name="seticketsrel_ticketid_idx">
 			<col>ticketid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_seticketsrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_seticketsrel FOREIGN KEY (crmid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_seticketsrel FOREIGN KEY (ticketid) REFERENCES vtiger_troubletickets(ticketid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1813,7 +1813,7 @@
 			<col>name</col>
 			<col>deleted</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_systems">
@@ -1828,7 +1828,7 @@
 		<field name="smtp_auth" type="C" size="5" />
 		<field name="server_path" type="C" size="256" />
 		<field name="from_email_field" type="C" size="50" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_currency_info">
@@ -1850,7 +1850,7 @@
 			<notnull />
 			<default value="0" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_defaultcv">
@@ -1861,12 +1861,12 @@
 			<notnull />
 		</field>
 		<field name="query" type="X" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_defaultcv" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_defaultcv FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1897,7 +1897,7 @@
 			<col>templatename</col>
 			<col>subject</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_faq">
@@ -1924,12 +1924,12 @@
 		<index name="faq_id_idx">
 			<col>id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_faq" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_faq FOREIGN KEY (id) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1949,12 +1949,12 @@
 		<index name="faqcomments_faqid_idx">
 			<col>faqid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_faqcomments" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_faqcomments FOREIGN KEY (faqid) REFERENCES vtiger_faq(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -1980,7 +1980,7 @@
 			-->
 		</field>
 		<field name="status" type="C" size="25" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_senotesrel">
@@ -1999,13 +1999,13 @@
 		<index name="senotesrel_crmid_idx">
 			<col>crmid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_senotesrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_senotesrel FOREIGN KEY (crmid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_senotesrel FOREIGN KEY (notesid) REFERENCES vtiger_notes(notesid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2017,12 +2017,12 @@
 		</field>
 		<field name="from_portal" type="C" size="3" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ticketcf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_ticketcf FOREIGN KEY (ticketid) REFERENCES vtiger_troubletickets(ticketid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2033,12 +2033,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_productcf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_productcf FOREIGN KEY (productid) REFERENCES vtiger_products(productid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2059,7 +2059,7 @@
 		<index name="idx_user_id">
 			<col>assigned_user_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_wordtemplates">
@@ -2093,7 +2093,7 @@
 			<notnull />
 			<default value="0" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_accountrating">
@@ -2117,7 +2117,7 @@
 			<col>rating</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_accounttype">
@@ -2141,7 +2141,7 @@
 			<col>accounttype</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_leadsource">
@@ -2165,7 +2165,7 @@
 			<col>source</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_opportunity_type">
@@ -2189,7 +2189,7 @@
 			<col>opportunity_type</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_leadstage">
@@ -2213,7 +2213,7 @@
 			<col>stage</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_leadstatus">
@@ -2237,7 +2237,7 @@
 			<col>status</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_eventstatus">
@@ -2261,7 +2261,7 @@
 			<col>status</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_duration_minutes">
@@ -2285,7 +2285,7 @@
 			<col>status</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_opportunitystage">
@@ -2312,7 +2312,7 @@
 			<col>stage</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_priority">
@@ -2336,7 +2336,7 @@
 			<col>priority</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_industry">
@@ -2360,7 +2360,7 @@
 			<col>industry</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salutationtype">
@@ -2380,7 +2380,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_taskpriority">
@@ -2398,7 +2398,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_taskstatus">
@@ -2416,7 +2416,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_activitytype">
@@ -2440,7 +2440,7 @@
 			<col>activitytype</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_sales_stage">
@@ -2459,7 +2459,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_faqcategories">
@@ -2477,7 +2477,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_faqstatus">
@@ -2495,7 +2495,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_faqcf"> 
@@ -2504,12 +2504,12 @@
 			<default value="0" /> 
 		</field> 
 
-		<opt platform="mysql">Engine=InnoDB</opt> 
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt> 
 	</table> 
 
 	<table name="vtiger_faqcf" alter="true"> 
 		<constraint>ADD CONSTRAINT fk_1_vtiger_faqcf FOREIGN KEY (faqid) REFERENCES vtiger_faq(id) ON DELETE CASCADE</constraint> 
-		<opt>Engine=InnoDB</opt> 
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt> 
 		<data> 
 		</data> 
 	</table> 
@@ -2529,7 +2529,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ticketcategories">
@@ -2547,7 +2547,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ticketpriorities">
@@ -2565,7 +2565,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ticketseverities">
@@ -2583,7 +2583,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ticketstatus">
@@ -2601,7 +2601,7 @@
 			<default value="0" />
 		</field>
 		<field name="sortorderid" type="I" size="11"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_durationhrs">
@@ -2618,7 +2618,7 @@
 			<notnull />
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_durationmins">
@@ -2635,7 +2635,7 @@
 			<notnull />
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_profile">
@@ -2648,7 +2648,7 @@
 		</field>
 		<field name="description" type="X" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_profile2globalpermissions">
@@ -2664,12 +2664,12 @@
 			<col>profileid</col>
 			<col>globalactionid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_profile2globalpermissions" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_profile2globalpermissions FOREIGN KEY (profileid) REFERENCES vtiger_profile(profileid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2686,7 +2686,7 @@
 			<col>profileid</col>
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_profile2standardpermissions">
@@ -2706,7 +2706,7 @@
 			<col>tabid</col>
 			<col>operation</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_profile2field">
@@ -2733,7 +2733,7 @@
 			<col>visible</col>
 			<col>profileid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_role2profile">
@@ -2747,7 +2747,7 @@
 			<col>roleid</col>
 			<col>profileid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_org_share_action_mapping">
@@ -2756,7 +2756,7 @@
 		</field>
 		<field name="share_action_name" type="C" size="200" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_def_org_share">
@@ -2770,12 +2770,12 @@
 		<field name="permission" type="I" size="19">
 		</field>
 		<field name="editstatus" type="I" size="19" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_def_org_share" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_def_org_share FOREIGN KEY (permission) REFERENCES vtiger_org_share_action_mapping(share_action_id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2799,7 +2799,7 @@
 			<col>visible</col>
 			<col>fieldid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_profile2utility">
@@ -2819,7 +2819,7 @@
 			<col>tabid</col>
 			<col>activityid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_productcategory">
@@ -2843,7 +2843,7 @@
 			<col>productcategory</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salesorder">
@@ -2897,14 +2897,14 @@
 		<index name="salesorder_contactid_idx">
 			<col>contactid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salesorder" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_salesorder FOREIGN KEY (contactid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_salesorder FOREIGN KEY (salesorderid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_salesorder FOREIGN KEY (vendorid) REFERENCES vtiger_vendor(vendorid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2921,12 +2921,12 @@
 		<field name="bill_street" type="C" size="250" />
 		<field name="bill_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_sobillads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_sobillads FOREIGN KEY (sobilladdressid) REFERENCES vtiger_salesorder(salesorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2943,12 +2943,12 @@
 		<field name="ship_street" type="C" size="250" />
 		<field name="ship_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_soshipads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_soshipads FOREIGN KEY (soshipaddressid) REFERENCES vtiger_salesorder(salesorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2959,12 +2959,12 @@
 			<default value="0"/>
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salesordercf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_salesordercf FOREIGN KEY (salesorderid) REFERENCES vtiger_salesorder(salesorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -2985,7 +2985,7 @@
 			<col>schedulednotificationname</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_activityproductrel">
@@ -3004,13 +3004,13 @@
 		<index name="activityproductrel_productid_idx">
 			<col>productid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_activityproductrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_activityproductrel FOREIGN KEY (activityid) REFERENCES vtiger_activity(activityid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_activityproductrel FOREIGN KEY (productid) REFERENCES vtiger_products(productid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3039,7 +3039,7 @@
 		<index name="relatedlists_relation_id_idx">
 			<col>relation_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_rss">
@@ -3057,7 +3057,7 @@
 		<field name="starred" type="I" size="1">
 			<default value="0" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_vendorcf">
@@ -3066,12 +3066,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_vendorcf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_vendorcf FOREIGN KEY (vendorid) REFERENCES vtiger_vendor(vendorid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3093,12 +3093,12 @@
 			<default value="1" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_pricebook" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_pricebook FOREIGN KEY (pricebookid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3109,12 +3109,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_pricebookcf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_pricebookcf FOREIGN KEY (pricebookid) REFERENCES vtiger_pricebook(pricebookid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3138,12 +3138,12 @@
 		<index name="pricebookproductrel_productid_idx">
 			<col>productid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_pricebookproductrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_pricebookproductrel FOREIGN KEY (pricebookid) REFERENCES vtiger_pricebook(pricebookid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3175,7 +3175,7 @@
 		</field>
 		<field name="status" type="C" size="10" />
 		<field name="set_default" type="I" size="2" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_quotes">
@@ -3223,14 +3223,14 @@
 		<index name="quotes_contactid_idx">
 			<col>contactid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_quotes" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_quotes FOREIGN KEY (contactid) REFERENCES vtiger_contactdetails(contactid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_quotes FOREIGN KEY (quoteid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_quotes FOREIGN KEY (potentialid) REFERENCES vtiger_potential(potentialid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3247,12 +3247,12 @@
 		<field name="bill_street" type="C" size="250" />
 		<field name="bill_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_quotesbillads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_quotesbillads FOREIGN KEY (quotebilladdressid) REFERENCES vtiger_quotes(quoteid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3269,12 +3269,12 @@
 		<field name="ship_street" type="C" size="250" />
 		<field name="ship_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_quotesshipads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_quotesshipads FOREIGN KEY (quoteshipaddressid) REFERENCES vtiger_quotes(quoteid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3285,12 +3285,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_quotescf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_quotescf FOREIGN KEY (quoteid) REFERENCES vtiger_quotes(quoteid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3344,7 +3344,7 @@
 		<index name="purchaseorder_contactid_idx">
 			<col>contactid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_purchaseorder" alter="true">
@@ -3352,7 +3352,7 @@
 		<constraint>ADD CONSTRAINT fk_2_vtiger_purchaseorder FOREIGN KEY (purchaseorderid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_purchaseorder FOREIGN KEY (quoteid) REFERENCES vtiger_quotes(quoteid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_4_vtiger_purchaseorder FOREIGN KEY (vendorid) REFERENCES vtiger_vendor(vendorid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3369,12 +3369,12 @@
 		<field name="bill_street" type="C" size="250" />
 		<field name="bill_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_pobillads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_pobillads FOREIGN KEY (pobilladdressid) REFERENCES vtiger_purchaseorder(purchaseorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3391,12 +3391,12 @@
 		<field name="ship_street" type="C" size="250" />
 		<field name="ship_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_poshipads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_poshipads FOREIGN KEY (poshipaddressid) REFERENCES vtiger_purchaseorder(purchaseorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3407,12 +3407,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_purchaseordercf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_purchaseordercf FOREIGN KEY (purchaseorderid) REFERENCES vtiger_purchaseorder(purchaseorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3464,13 +3464,13 @@
 		<index name="invoice_purchaseorderid_idx">
 			<col>invoiceid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_invoice" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_invoice FOREIGN KEY (invoiceid) REFERENCES vtiger_crmentity(crmid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_invoice FOREIGN KEY (salesorderid) REFERENCES vtiger_salesorder(salesorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3487,12 +3487,12 @@
 		<field name="bill_street" type="C" size="250" />
 		<field name="bill_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_invoicebillads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_invoicebillads FOREIGN KEY (invoicebilladdressid) REFERENCES vtiger_invoice(invoiceid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3509,12 +3509,12 @@
 		<field name="ship_street" type="C" size="250" />
 		<field name="ship_pobox" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_invoiceshipads" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_invoiceshipads FOREIGN KEY (invoiceshipaddressid) REFERENCES vtiger_invoice(invoiceid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3525,12 +3525,12 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_invoicecf" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_invoicecf FOREIGN KEY (invoiceid) REFERENCES vtiger_invoice(invoiceid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3551,7 +3551,7 @@
 			<key />
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_customview">
@@ -3580,12 +3580,12 @@
 			<col>entitytype</col>
 		</index>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_customview" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_customview FOREIGN KEY (entitytype) REFERENCES vtiger_tab (name) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3609,12 +3609,12 @@
 		<index name="cvcolumnlist_cvid_idx">
 			<col>cvid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_cvcolumnlist" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_cvcolumnlist FOREIGN KEY (cvid) REFERENCES vtiger_customview (cvid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3639,12 +3639,12 @@
 		<index name="cvstdfilter_cvid_idx">
 			<col>cvid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_cvstdfilter" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_cvstdfilter FOREIGN KEY (cvid) REFERENCES vtiger_customview (cvid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3676,12 +3676,12 @@
 		<index name="cvadvfilter_cvid_idx">
 			<col>cvid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_cvadvfilter" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_cvadvfilter FOREIGN KEY (cvid) REFERENCES vtiger_customview (cvid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3703,12 +3703,12 @@
 		<index name="customaction_cvid_idx">
 			<col>cvid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_customaction" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_customaction FOREIGN KEY (cvid) REFERENCES vtiger_customview (cvid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3727,7 +3727,7 @@
 		<index name="selectquery_queryid_idx">
 			<col>queryid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_selectcolumn">
@@ -3746,12 +3746,12 @@
 		<index name="selectcolumn_queryid_idx">
 			<col>queryid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_selectcolumn" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_selectcolumn FOREIGN KEY (queryid) REFERENCES vtiger_selectquery (queryid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3783,12 +3783,12 @@
 		<index name="relcriteria_queryid_idx">
 			<col>queryid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_relcriteria" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_relcriteria FOREIGN KEY (queryid) REFERENCES vtiger_selectquery (queryid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3809,7 +3809,7 @@
 			<default value="SAVED" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_report">
@@ -3854,13 +3854,13 @@
 		<index name="report_folderid_idx">
 			<col>folderid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_report" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_report FOREIGN KEY (folderid) REFERENCES vtiger_reportfolder (folderid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_report FOREIGN KEY (queryid) REFERENCES vtiger_selectquery (queryid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3877,12 +3877,12 @@
 			<default value="" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reportmodules" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_reportmodules FOREIGN KEY (reportmodulesid) REFERENCES vtiger_report (reportid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3901,12 +3901,12 @@
 			<default value="Asc" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reportsortcol" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_reportsortcol FOREIGN KEY (reportid) REFERENCES vtiger_report (reportid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3931,12 +3931,12 @@
 		<index name="reportdatefilter_datefilterid_idx">
 			<col>datefilterid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reportdatefilter" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_reportdatefilter FOREIGN KEY (datefilterid) REFERENCES vtiger_report (reportid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3956,12 +3956,12 @@
 		<index name="reportsummary_reportsummaryid_idx">
 			<col>reportsummaryid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reportsummary" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_reportsummary FOREIGN KEY (reportsummaryid) REFERENCES vtiger_report (reportid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -3974,7 +3974,7 @@
 	</table>
 	<table name="vtiger_reporttype" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_reporttype FOREIGN KEY (reportid) REFERENCES vtiger_report (reportid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4000,7 +4000,7 @@
 			<col>usageunit</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_glacct">
@@ -4024,7 +4024,7 @@
 			<col>glacct</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_quotestage">
@@ -4048,7 +4048,7 @@
 			<col>quotestage</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_invoicestatus">
@@ -4072,7 +4072,7 @@
 			<col>invoicestatus</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_postatus">
@@ -4096,7 +4096,7 @@
 			<col>postatus</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_sostatus">
@@ -4120,7 +4120,7 @@
 			<col>sostatus</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 
 	</table>
 
@@ -4145,7 +4145,7 @@
 			<col>carrier</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_taxclass">
@@ -4169,7 +4169,7 @@
 			<col>taxclass</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_organizationdetails">
@@ -4191,7 +4191,7 @@
 		<field name="logo" type="X" />
 		<field name="vatid" type="C" size="100" /> 
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_recurringtype">
@@ -4215,7 +4215,7 @@
 			<col>recurringtype</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_recurringevents">
@@ -4231,12 +4231,12 @@
 		<field name="recurringfreq" type="I" size="19" />
 		<field name="recurringinfo" type="C" size="50" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_recurringevents" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_recurringevents FOREIGN KEY (activityid) REFERENCES vtiger_activity(activityid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4252,7 +4252,7 @@
 		<field name="label" type="C" size="50" />
 		<field name="status" type="C" size="30" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_inventory_tandc">
@@ -4263,7 +4263,7 @@
 			<notnull />
 		</field>
 		<field name="tandc" type="X" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_convertleadmapping">
@@ -4280,7 +4280,7 @@
 		<field name="editable" type="I" size="19">
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_actionmapping">
@@ -4292,7 +4292,7 @@
 		</field>
 		<field name="securitycheck" type="I" size="19" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_org_share_action2tab">
@@ -4303,13 +4303,13 @@
 			<key />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_org_share_action2tab" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_org_share_action2tab FOREIGN KEY (share_action_id) REFERENCES vtiger_org_share_action_mapping(share_action_id) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_org_share_action2tab FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4323,7 +4323,7 @@
 		</field>
 		<field name="relationtype" type="C" size="200">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<index name="idx_datashare_module_rel_tabid">
 			<col>tabid</col>
 		</index>
@@ -4331,7 +4331,7 @@
 
 	<table name="vtiger_datashare_module_rel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_module_rel FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4352,14 +4352,14 @@
 		<index name="datashare_grp2grp_to_groupid_idx">
 			<col>to_groupid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_grp2grp" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_grp2grp FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_grp2grp FOREIGN KEY (share_groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_grp2grp FOREIGN KEY (to_groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4380,14 +4380,14 @@
 		<index name="idx_datashare_grp2role_to_roleid">
 			<col>to_roleid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_grp2role" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_grp2role FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_grp2role FOREIGN KEY (share_groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_grp2role FOREIGN KEY (to_roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4408,14 +4408,14 @@
 		<index name="datashare_grp2rs_to_roleandsubid_idx">
 			<col>to_roleandsubid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_grp2rs" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_grp2rs FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_grp2rs FOREIGN KEY (share_groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_grp2rs FOREIGN KEY (to_roleandsubid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4436,14 +4436,14 @@
 		<index name="idx_datashare_role2group_to_groupid">
 			<col>to_groupid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_role2group" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_role2group FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_role2group FOREIGN KEY (to_groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_role2group FOREIGN KEY (share_roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4464,14 +4464,14 @@
 		<index name="datashare_role2role_to_roleid_idx">
 			<col>to_roleid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_role2role" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_role2role FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_role2role FOREIGN KEY (share_roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_role2role FOREIGN KEY (to_roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4492,14 +4492,14 @@
 		<index name="datashare_role2s_to_roleandsubid_idx">
 			<col>to_roleandsubid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_role2rs" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_role2rs FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_role2rs FOREIGN KEY (share_roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_role2rs FOREIGN KEY (to_roleandsubid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4520,14 +4520,14 @@
 		<index name="datashare_rs2grp_to_groupid_idx">
 			<col>to_groupid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_rs2grp" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_rs2grp FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_rs2grp FOREIGN KEY (to_groupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_rs2grp FOREIGN KEY (share_roleandsubid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4548,14 +4548,14 @@
 		<index name="datashare_rs2role_to_roleid_idx">
 			<col>to_roleid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_rs2role" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_rs2role FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_rs2role FOREIGN KEY (share_roleandsubid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_rs2role FOREIGN KEY (to_roleid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4576,14 +4576,14 @@
 		<index name="idx_datashare_rs2rs_to_roleandsubid_idx">
 			<col>to_roleandsubid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_rs2rs" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_rs2rs FOREIGN KEY (shareid) REFERENCES vtiger_datashare_module_rel(shareid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_rs2rs FOREIGN KEY (share_roleandsubid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_datashare_rs2rs FOREIGN KEY (to_roleandsubid) REFERENCES vtiger_role(roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4602,13 +4602,13 @@
 		<index name="datashare_relatedmodules_relatedto_tabid_idx">
 			<col>relatedto_tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_datashare_relatedmodules" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_datashare_relatedmodules FOREIGN KEY (relatedto_tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_datashare_relatedmodules FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4626,7 +4626,7 @@
 			<col>shareid</col>
 			<col>permission</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_parenttab">
@@ -4649,7 +4649,7 @@
 			<col>parenttab_label</col>
 			<col>visible</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_read_user_sharing_per">
@@ -4667,14 +4667,14 @@
 			<col>userid</col>
 			<col>shareduserid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_read_user_sharing_per" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_tmp_read_user_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_read_user_sharing_per FOREIGN KEY (shareduserid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_read_user_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4694,14 +4694,14 @@
 			<col>userid</col>
 			<col>sharedgroupid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_read_group_sharing_per" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_tmp_read_group_sharing_per FOREIGN KEY (sharedgroupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_read_group_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_read_group_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4721,14 +4721,14 @@
 			<col>userid</col>
 			<col>shareduserid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_write_user_sharing_per" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_tmp_write_user_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_write_user_sharing_per FOREIGN KEY (shareduserid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_write_user_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4748,14 +4748,14 @@
 			<col>userid</col>
 			<col>sharedgroupid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_write_group_sharing_per" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_tmp_write_group_sharing_per FOREIGN KEY (sharedgroupid) REFERENCES vtiger_groups(groupid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_write_group_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_write_group_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4779,7 +4779,7 @@
 			<col>shareduserid</col>
 			<col>relatedtabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_read_user_rel_sharing_per" alter="true">
@@ -4787,7 +4787,7 @@
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_read_user_rel_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_read_user_rel_sharing_per FOREIGN KEY (shareduserid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_4_vtiger_tmp_read_user_rel_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4811,7 +4811,7 @@
 			<col>sharedgroupid</col>
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_read_group_rel_sharing_per" alter="true">
@@ -4819,7 +4819,7 @@
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_read_group_rel_sharing_per FOREIGN KEY (relatedtabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_read_group_rel_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_4_vtiger_tmp_read_group_rel_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4843,7 +4843,7 @@
 			<col>shareduserid</col>
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_write_user_rel_sharing_per" alter="true">
@@ -4851,7 +4851,7 @@
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_write_user_rel_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_write_user_rel_sharing_per FOREIGN KEY (shareduserid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_4_vtiger_tmp_write_user_rel_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4875,7 +4875,7 @@
 			<col>sharedgroupid</col>
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tmp_write_group_rel_sharing_per" alter="true">
@@ -4883,7 +4883,7 @@
 		<constraint>ADD CONSTRAINT fk_2_vtiger_tmp_write_group_rel_sharing_per FOREIGN KEY (relatedtabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_3_vtiger_tmp_write_group_rel_sharing_per FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_4_vtiger_tmp_write_group_rel_sharing_per FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4903,19 +4903,19 @@
 			<col>tabid</col>
 			<col>parenttabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_parenttabrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_parenttabrel FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
 
 	<table name="vtiger_parenttabrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_2_vtiger_parenttabrel FOREIGN KEY (parenttabid) REFERENCES vtiger_parenttab(parenttabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -4941,7 +4941,7 @@
 			<col>campaigntype</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_campaignstatus">
@@ -4964,7 +4964,7 @@
 		<index name="campaignstatus_campaignstatus_idx">
 			<col>campaignstatus</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_expectedresponse">
@@ -4988,7 +4988,7 @@
 			<col>expectedresponse</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<table name="vtiger_picklist">
 		<field name="picklistid" type="I" size="11">
@@ -5002,7 +5002,7 @@
 			<col>name</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<table name="vtiger_role2picklist">
 		<field name="roleid" type="C" size="255">
@@ -5021,17 +5021,17 @@
 			<col>picklistid</col>
 			<col>picklistvalueid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<table name="vtiger_role2picklist" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_role2picklist FOREIGN KEY (roleid) REFERENCES vtiger_role (roleid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
 	<table name="vtiger_role2picklist" alter="true">
 		<constraint>ADD CONSTRAINT fk_2_vtiger_role2picklist FOREIGN KEY (picklistid) REFERENCES vtiger_picklist (picklistid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5055,7 +5055,7 @@
 		<index name="portal_portalname_idx">
 			<col>portalname</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_soapservice">
@@ -5068,7 +5068,7 @@
 		<field name="sessionid" type="C" size="100">
 			<default value="NULL" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_announcement">
@@ -5084,7 +5084,7 @@
 		<index name="announcement_creatorid_idx">
 			<col>creatorid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_freetags">
@@ -5107,7 +5107,7 @@
 		<field name="owner" type="I" size="19">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_freetagged_objects">
@@ -5140,7 +5140,7 @@
 			<col>tagger_id</col>
 			<col>object_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_emaildetails">
@@ -5173,7 +5173,7 @@
 			<notnull />
 			<default value="" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_invitees">
@@ -5184,7 +5184,7 @@
 			<KEY/>
 		</field>
 		<field name="status" type="C" size="50" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_inventorytaxinfo">
@@ -5204,7 +5204,7 @@
 			<col>taxname</col>
 		</index>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_producttaxrel">
@@ -5225,7 +5225,7 @@
 			<col>taxid</col>
 		</index>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_status">
@@ -5248,7 +5248,7 @@
 			<col>source</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_activity_view">
@@ -5272,7 +5272,7 @@
 			<col>source</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_lead_view">
@@ -5296,7 +5296,7 @@
 			<col>source</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_date_format">
@@ -5320,7 +5320,7 @@
 			<col>source</col>
 			<unique />
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_postatushistory">
@@ -5339,12 +5339,12 @@
 		<index name="postatushistory_purchaseorderid_idx">
 			<col>purchaseorderid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_postatushistory" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_postatushistory FOREIGN KEY (purchaseorderid) REFERENCES vtiger_purchaseorder(purchaseorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5365,12 +5365,12 @@
 		<index name="sostatushistory_salesorderid_idx">
 			<col>salesorderid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_sostatushistory" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_sostatushistory FOREIGN KEY (salesorderid) REFERENCES vtiger_salesorder(salesorderid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5391,12 +5391,12 @@
 		<index name="quotestagehistory_quoteid_idx">
 			<col>quoteid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_quotestagehistory" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_quotestagehistory FOREIGN KEY (quoteid) REFERENCES vtiger_quotes(quoteid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5417,12 +5417,12 @@
 		<index name="invoicestatushistory_invoiceid_idx">
 			<col>invoiceid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_invoicestatushistory" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_invoicestatushistory FOREIGN KEY (invoiceid) REFERENCES vtiger_invoice(invoiceid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5436,7 +5436,7 @@
 		<field name="action" type="C" size="255" />
 		<field name="recordid" type="C" size="20" />
 		<field name="actiondate" type="T"/>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_inventoryproductrel">
@@ -5464,7 +5464,7 @@
 		<index name="inventoryproductrel_productid_idx">
 			<col>productid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_shippingtaxinfo">
@@ -5484,7 +5484,7 @@
 			<col>taxname</col>
 		</index>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_inventoryshippingrel">
@@ -5493,7 +5493,7 @@
 		<index name="inventoryishippingrel_id_idx">
 			<col>id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salesmanattachmentsrel">
@@ -5512,13 +5512,13 @@
 		<index name="salesmanattachmentsrel_attachmentsid_idx">
 			<col>attachmentsid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_salesmanattachmentsrel" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_salesmanattachmentsrel FOREIGN KEY (smid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_salesmanattachmentsrel FOREIGN KEY (attachmentsid) REFERENCES vtiger_attachments(attachmentsid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5545,12 +5545,12 @@
 		<index name="entityname_tabid_idx">
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_entityname" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_entityname FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5562,7 +5562,7 @@
 		</field>
 		<field name="old_version" type="C" size="30" />
 		<field name="current_version" type="C" size="30" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<!-- Database changes after 5.0.4 GA -->
@@ -5574,7 +5574,7 @@
 		<field name="rel_column" type="C" size="200" />
 		<field name="ref_column" type="C" size="200" />
 		<field name="related_crm_ids" type="X" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_activity_reminder_popup">
@@ -5597,7 +5597,7 @@
 		<field name="status" type="I" size="2" >
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reminder_interval">
@@ -5614,7 +5614,7 @@
 		<field name="presence" type="I" size="1" >
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_user2mergefields">
@@ -5626,7 +5626,7 @@
 			<col>userid</col>
 			<col>tabid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_productcurrencyrel">
@@ -5638,7 +5638,7 @@
 		</field>
 		<field name="converted_price"  type="N" size="25.2" />
 		<field name="actual_price"  type="N" size="25.2" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_attachmentsfolder">
@@ -5658,7 +5658,7 @@
 			<default value="NULL" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_homestuff">
@@ -5682,11 +5682,11 @@
 		<index name="stuff_stuffid_idx">
 			<col>stuffid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<table name="vtiger_homestuff" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_homestuff FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5708,12 +5708,12 @@
 		<index name="stuff_stuffid_idx">
 			<col>stuffid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_homemodule" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_homemodule FOREIGN KEY (stuffid) REFERENCES vtiger_homestuff(stuffid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5725,12 +5725,12 @@
 		<index name="stuff_stuffid_idx">
 			<col>stuffid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_homemoduleflds" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_homemoduleflds FOREIGN KEY (stuffid) REFERENCES vtiger_homemodule(stuffid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5747,12 +5747,12 @@
 		<index name="stuff_stuffid_idx">
 			<col>stuffid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_homerss" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_homerss FOREIGN KEY (stuffid) REFERENCES vtiger_homestuff(stuffid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5767,12 +5767,12 @@
 		<index name="stuff_stuffid_idx">
 			<col>stuffid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_homedashbd" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_homedashbd FOREIGN KEY (stuffid) REFERENCES vtiger_homestuff(stuffid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5792,12 +5792,12 @@
 		<index name="stuff_stuffid_idx">
 			<col>stuffid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_homedefault" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_homedefault FOREIGN KEY (stuffid) REFERENCES vtiger_homestuff(stuffid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5817,7 +5817,7 @@
 			<unique />
 			<col>uitype</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_referencetype">
@@ -5829,12 +5829,12 @@
 			<key />
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_referencetype" alter="true">
 		<constraint>ADD CONSTRAINT `fk_1_vtiger_referencetype` FOREIGN KEY (`fieldtypeid`) REFERENCES `vtiger_ws_fieldtype` (`fieldtypeid`) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5854,7 +5854,7 @@
 			<unique />
 			<col>userid</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_entity">
@@ -5876,7 +5876,7 @@
 		<field name="ismodule" type="I" size="3">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_entity_tables">
@@ -5888,12 +5888,12 @@
 			<notnull />
 			<key />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_entity_tables" alter="true">
 		<constraint>ADD CONSTRAINT `fk_1_vtiger_ws_actor_tables` FOREIGN KEY (`webservice_entity_id`) REFERENCES `vtiger_ws_entity` (`id`) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5917,7 +5917,7 @@
 			<col>table_name</col>
 			<col>field_name</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_entity_referencetype">
@@ -5929,12 +5929,12 @@
 			<key />
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_entity_referencetype" alter="true">
 		<constraint>ADD CONSTRAINT `vtiger_fk_1_actors_referencetype` FOREIGN KEY (`fieldtypeid`) REFERENCES `vtiger_ws_entity_fieldtype` (`fieldtypeid`) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -5961,7 +5961,7 @@
 		<field name="prelogin" type="I" size="3">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_operation_parameters">
@@ -5980,7 +5980,7 @@
 		<field name="sequence" type="I" size="11">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_entity_name">
@@ -5996,7 +5996,7 @@
 		<field name="table_name" type="C" size="50">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<!-- END -->
 
@@ -6028,7 +6028,7 @@
 			<unique />
 			<col>eventhandler_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_eventhandler_module">
@@ -6044,7 +6044,7 @@
 			<unique />
 			<col>eventhandler_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<!-- vtmailscanner -->
@@ -6067,7 +6067,7 @@
 		<field name="scanfrom" type="C" size="10">
 			<default value="ALL" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_mailscanner_ids">
@@ -6075,7 +6075,7 @@
 		<field name="messageid" type="X"></field>
 		<field name="crmid" type="I"></field>
 		<field name="refids" type="X"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_mailscanner_folders">
@@ -6088,7 +6088,7 @@
 		<field name="lastscan" type="C" size="30"></field>
 		<field name="rescan" type="I" size="1"></field>
 		<field name="enabled" type="I" size="1"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_mailscanner_rules">
@@ -6105,7 +6105,7 @@
 		<field name="body" type="C" size="255"></field>
 		<field name="matchusing" type="C" size="5"></field>
 		<field name="sequence" type="I"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_mailscanner_actions">
@@ -6119,13 +6119,13 @@
 		<field name="lookup" type="C" size="30"></field>
 		<field name="sequence" type="I"></field>
 		<field name="actiontype" type="C" size="10"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_mailscanner_ruleactions">
 		<field name="ruleid" type="I"></field>
 		<field name="actionid" type="I"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<!-- END -->
 
@@ -6140,7 +6140,7 @@
 		</field>
 		<field name="payment_duration" type="C" size="200"></field>
 		<field name="invoice_status" type="C" size="200"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_recurring_frequency">
@@ -6148,7 +6148,7 @@
 		<field name="recurring_frequency" type="C" size="200"></field>
 		<field name="sortorderid" type="I"></field>
 		<field name="presence" type="I"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_payment_duration">
@@ -6156,7 +6156,7 @@
 		<field name="payment_duration" type="C" size="200"></field>
 		<field name="sortorderid" type="I"></field>
 		<field name="presence" type="I"></field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<!-- END -->
 
@@ -6202,7 +6202,7 @@
 			<unique />
 			<col>workflow_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="com_vtiger_workflow_activatedonce">
@@ -6212,7 +6212,7 @@
 		<field name="entity_id" type="I" >
 			<key />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 
@@ -6233,7 +6233,7 @@
 			<unique />
 			<col>task_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="com_vtiger_workflowtask_queue">
@@ -6250,7 +6250,7 @@
 			<col>task_id</col>
 			<col>entity_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="com_vtiger_workflowtasks_entitymethod">
@@ -6269,7 +6269,7 @@
 			<unique />
 			<col>workflowtasks_entitymethod_id</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="com_vtiger_workflowtemplates">
@@ -6283,7 +6283,7 @@
 		</field>
 		<field name="template" type="X">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="com_vtiger_workflow_tasktypes">
@@ -6305,7 +6305,7 @@
 		</field>
 		<field name="sourcemodule" type="C" size="255">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<!-- com_vtiger_workflow ends-->
 
@@ -6317,7 +6317,7 @@
 		</field>
 		<field name="use_asterisk" type="C" size="3">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_asterisk">
@@ -6331,7 +6331,7 @@
 		</field>
 		<field name="version" type="C" size="50">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_asteriskincomingcalls">
@@ -6349,7 +6349,7 @@
 		</field>
 		<field name="refuid" type="C" size="255">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_asteriskincomingevents">
@@ -6406,7 +6406,7 @@
 			<col>semodule</col>
 			<col>active</col>
 		</index>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<!-- Table added to store languages -->
@@ -6430,7 +6430,7 @@
 		</field>
 		<field name="active" type="I" size="1">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_crmentityrel">
@@ -6446,7 +6446,7 @@
 		<field name="relmodule" type="C" size="100">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_fieldmodulerel">
@@ -6465,7 +6465,7 @@
 		<field name="sequence" type="I">
 			<default value="NULL" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_links">
@@ -6489,7 +6489,7 @@
 			<default value="NULL" />
 		</field>
 		<field name="parent_link" type="I" size="19" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<index name="link_tabidtype_idx">
 			<col>tabid</col>
 			<col>linktype</col>
@@ -6506,7 +6506,7 @@
 		</field>
 		<field name="sequence" type="I" size="19">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_settings_field">
@@ -6529,12 +6529,12 @@
 		<field name="active" type="I" size="19">
 			<default value="0"/>
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_settings_field" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_settings_field FOREIGN KEY (blockid) REFERENCES vtiger_settings_blocks(blockid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -6546,14 +6546,14 @@
 		<field name="mailid" type="I" />
 		<field name="accessdate" type="D" />
 		<field name="accesstime" type="T" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_email_track">
 		<field name="crmid" type="I" />
 		<field name="mailid" type="I" />
 		<field name="access_count" type="I" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<index name="link_tabidtype_idx">
 			<col>crmid</col>
 			<col>mailid</col>
@@ -6571,7 +6571,7 @@
 		<field name="setype" type="C" size="200">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reportfilters">
@@ -6581,7 +6581,7 @@
 		<field name="name" type="C" size="200">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<!-- notebook changes start -->
@@ -6594,7 +6594,7 @@
 		</field>
 		<field name="contents" type="X">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	<!-- notebook changes end -->
 
@@ -6611,7 +6611,7 @@
 		<field name="quantity" type="I" size="19">
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_activitycf">
@@ -6620,7 +6620,7 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_user_module_preferences">
@@ -6633,13 +6633,13 @@
 		<field name="default_cvid" type="I" size="19">
 			<notnull />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_user_module_preferences" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_user_module_preferences FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE ON UPDATE CASCADE</constraint>
 		<constraint>ADD CONSTRAINT fk_2_vtiger_user_module_preferences FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE ON UPDATE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 		<data>
 		</data>
 	</table>
@@ -6653,7 +6653,7 @@
 			<default value="4" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<!-- home page changes end -->
@@ -6663,7 +6663,7 @@
 			<default value="0" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_currencies">
@@ -6675,7 +6675,7 @@
 		<field name="currency_code" type="C" size="50" />
 		<field name="currency_symbol" type="C" size="11" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tab_info">
@@ -6683,12 +6683,12 @@
 		<field name="prefname" type="C" size="256" />
 		<field name="prefvalue" type="C" size="256" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_tab_info" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_tab_info FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE ON UPDATE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_campaignrelstatus">
@@ -6697,7 +6697,7 @@
 		<field name="sortorderid" type="I" size="19" />
 		<field name="presence" type="I" size="19" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_campaignaccountrel">
@@ -6705,7 +6705,7 @@
 		<field name="accountid" type="I" size="19" />
 		<field name="campaignrelstatusid" type="I" size="19" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_customerportal_tabs">
@@ -6719,7 +6719,7 @@
 		<field name="sequence" type="I" size="1">
 			<default value="NULL" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_customerportal_prefs">
@@ -6734,7 +6734,7 @@
 		<field name="prefvalue" type="I" size="20">
 			<default value="NULL" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_relcriteria_grouping">
@@ -6749,7 +6749,7 @@
 		</field>
 		<field name="condition_expression" type="X">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_scheduled_reports">
@@ -6765,7 +6765,7 @@
 		<field name="next_trigger_time" type="TS">
 			<DEFTIMESTAMP/>
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_ws_fieldinfo">
@@ -6777,7 +6777,7 @@
 		</field>
 		<field name="property_value" type="C" size="64">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_cvadvfilter_grouping">
@@ -6792,7 +6792,7 @@
 		</field>
 		<field name="condition_expression" type="X">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_picklist_dependency">
@@ -6812,7 +6812,7 @@
 		</field>
 		<field name="criteria" type="X">
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_currency_grouping_pattern">
@@ -6831,7 +6831,7 @@
 			<notnull />
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_currency_decimal_separator">
@@ -6850,7 +6850,7 @@
 			<notnull />
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_currency_grouping_separator">
@@ -6869,7 +6869,7 @@
 			<notnull />
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_currency_symbol_placement">
@@ -6888,7 +6888,7 @@
 			<notnull />
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_time_zone">
@@ -6907,7 +6907,7 @@
 			<notnull />
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_homereportchart">
@@ -6916,7 +6916,7 @@
 		</field>
 		<field name="reportid" type="I" size="19" />
 		<field name="reportcharttype" type="C" size="100" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reportgroupbycolumn">
@@ -6924,18 +6924,18 @@
 		<field name="sortid" type="I" size="19" />
 		<field name="sortcolname" type="C" size="250" />
 		<field name="dategroupbycriteria" type="C" size="250" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_reportgroupbycolumn" alter="true">
 		<constraint>ADD CONSTRAINT fk_1_vtiger_reportgroupbycolumn FOREIGN KEY (reportid) REFERENCES vtiger_report(reportid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_crmsetup">
 		<field name="userid" type="I" size="11" />
 		<field name="setup_status" type="I" size="2" />
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_feedback">
@@ -6945,7 +6945,7 @@
 			<default value="false" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_shareduserinfo">
@@ -6962,7 +6962,7 @@
 			<default value="1" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_calendar_default_activitytypes">
@@ -6977,7 +6977,7 @@
 		</field>
 		<field name="conditions" type="C" size="255" />
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_calendar_user_activitytypes">
@@ -6991,7 +6991,7 @@
 			<default value="1" />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_dashboard_tabs">
@@ -7014,17 +7014,17 @@
 			<unique />
 		</field>
 
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_dashboard_tabs" alter="true">
 		<constraint>ADD CONSTRAINT vtiger_dashboard_tabs_ibfk_1 FOREIGN KEY (userid) REFERENCES vtiger_users(id) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 	
 	<table name="vtiger_dashboard_tabs" alter="true">
 		<constraint>ADD CONSTRAINT tabname UNIQUE(tabname, userid)</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_app2tab">
@@ -7034,11 +7034,11 @@
 		<field name="visible" type="I" size="3" >
 			<default value="1" />
 		</field>
-		<opt platform="mysql">Engine=InnoDB</opt>
+		<opt platform="mysql">ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 
 	<table name="vtiger_app2tab" alter="true">
 		<constraint>ADD CONSTRAINT vtiger_app2tab_fk_tab FOREIGN KEY (tabid) REFERENCES vtiger_tab(tabid) ON DELETE CASCADE</constraint>
-		<opt>Engine=InnoDB</opt>
+		<opt>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci'</opt>
 	</table>
 </schema>

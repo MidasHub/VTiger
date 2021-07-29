@@ -30,7 +30,7 @@ if(defined('VTIGER_UPGRADE')) {
 	}
 
 	if (!Vtiger_Utils::CheckTable('vtiger_activity_recurring_info')) {
-		$db->pquery('CREATE TABLE IF NOT EXISTS vtiger_activity_recurring_info(activityid INT(19) NOT NULL, recurrenceid INT(19) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=UTF8;', array());
+		$db->pquery('CREATE TABLE IF NOT EXISTS vtiger_activity_recurring_info(activityid INT(19) NOT NULL, recurrenceid INT(19) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;', array());
 	}
 
 	$columns = $db->getColumnNames('vtiger_crmentity');
@@ -729,7 +729,7 @@ if(defined('VTIGER_UPGRADE')) {
 	$projectTaskModule->setRelatedList($emailModule, 'Emails', 'ADD', 'get_emails');
 
 	$sql = "CREATE TABLE IF NOT EXISTS vtiger_emails_recipientprefs(`id` INT(11) NOT NULL AUTO_INCREMENT,`tabid` INT(11) NOT NULL,
-				`prefs` VARCHAR(255) NULL DEFAULT NULL, `userid` INT(11), PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+				`prefs` VARCHAR(255) NULL DEFAULT NULL, `userid` INT(11), PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 	$db->pquery($sql, array());
 
 	//To change the convert lead webserice operation parameters which was wrong earliear 
@@ -917,7 +917,7 @@ if(defined('VTIGER_UPGRADE')) {
 									status varchar(255),
 									defaultcolor varchar(50),
 									color varchar(50),
-									UNIQUE KEY status (status)) ENGINE=InnoDB DEFAULT CHARSET=utf8');
+									UNIQUE KEY status (status)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
 	}
 
 	$statusColorMap = array(
