@@ -256,7 +256,7 @@ class PearDatabase{
 
 			$sql_start_time = microtime(true);
 
-			$setnameSql = "SET NAMES utf8";
+			$setnameSql = "SET NAMES utf8mb4";
 			$this->database->Execute($setnameSql);
 			$this->logSqlTiming($sql_start_time, microtime(true), $setnameSql);
 		}
@@ -1072,13 +1072,13 @@ class PearDatabase{
 			// If we have all the required information break the loop.
 			if($db_character_set != null && $db_collation_type != null) break;
 		}
-		return (stristr($db_character_set, 'utf8') && stristr($db_collation_type, 'utf8'));
+		return (stristr($db_character_set, 'utf8mb4') && stristr($db_collation_type, 'utf8mb4_unicode_ci'));
 	}
 
 	function get_db_charset() {
 		global $db_type;
 		if($db_type == 'pgsql')
-			return 'UTF8';
+			return 'UTF8MB4';
 		$dbvarRS = $this->database->query("show variables like '%_database' ");
 		$db_character_set = null;
 		while(!$dbvarRS->EOF) {

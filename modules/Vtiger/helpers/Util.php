@@ -762,7 +762,7 @@ class Vtiger_Util_Helper {
 			// If we have all the required information break the loop. 
 			if($db_character_set != null && $db_collation_type != null) break;
 		}
-		return (stristr($db_character_set, 'utf8') && stristr($db_collation_type, 'utf8'));
+		return (stristr($db_character_set, 'utf8mb4') && stristr($db_collation_type, 'utf8mb4_unicode_ci'));
 	}
 
 	public static function checkDbLocalInfileSupport() {
