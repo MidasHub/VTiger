@@ -23,7 +23,11 @@ class Import_Config_Model extends Vtiger_Base_Model {
 			// Individual batch limit - Specified number of records will be imported at one shot and the cycle will repeat till all records are imported
 			'importBatchLimit' => '500',
 			// Threshold record limit for immediate import. If record count is more than this, then the import is scheduled through cron job
+<<<<<<< HEAD
 			'immediateImportLimit' => '99990',
+=======
+			'immediateImportLimit' => '9999',
+>>>>>>> 71cc2c0760ad9579d8eef605b3ec014d356202ba
 			'importPagingLimit' => '10000',
 		);
 
