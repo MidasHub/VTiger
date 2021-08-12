@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2021-07-29 14:26:09
+<?php /* Smarty version Smarty-3.1.7, created on 2021-08-12 03:22:57
          compiled from "/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/ManageSubscription.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20854506456102ba812d7191-82003958%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:258691255611494115ac048-09581921%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0437d9bc605839cc93bbfc237b97e497955ea89c' => 
     array (
       0 => '/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/ManageSubscription.tpl',
-      1 => 1627568345,
+      1 => 1628738369,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20854506456102ba812d7191-82003958',
+  'nocache_hash' => '258691255611494115ac048-09581921',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_6102ba812e1d7',
+  'unifunc' => 'content_611494115b256',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6102ba812e1d7')) {function content_6102ba812e1d7($_smarty_tpl) {?><div class='modal-dialog'>
+<?php if ($_valid && !is_callable('content_611494115b256')) {function content_611494115b256($_smarty_tpl) {?><div class='modal-dialog'>
     <div class='modal-content'>
         <div class="modal-header contentsBackground">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" <?php if ($_smarty_tpl->tpl_vars['CHARGIFY_CUSTOMER_ID']->value==0||$_smarty_tpl->tpl_vars['CHARGIFY_CUSTOMER_ID']->value==''){?>onclick="app.helper.showSuccessNotification({message: app.vtranslate('JS_PLEASE_WAIT')}); reloadCurrentPage();"<?php }?>><span aria-hidden="true" class='fa fa-close'></span></button>

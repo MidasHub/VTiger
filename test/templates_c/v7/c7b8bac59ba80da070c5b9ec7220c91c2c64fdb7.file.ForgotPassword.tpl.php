@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2021-07-29 14:26:09
+<?php /* Smarty version Smarty-3.1.7, created on 2021-08-12 03:22:57
          compiled from "/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/ForgotPassword.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20421736756102ba812e4ac8-67551072%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1377561809611494115b4052-95206160%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c7b8bac59ba80da070c5b9ec7220c91c2c64fdb7' => 
     array (
       0 => '/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/ForgotPassword.tpl',
-      1 => 1627568345,
+      1 => 1628738369,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20421736756102ba812e4ac8-67551072',
+  'nocache_hash' => '1377561809611494115b4052-95206160',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_6102ba812f07c',
+  'unifunc' => 'content_611494115b88b',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6102ba812f07c')) {function content_6102ba812f07c($_smarty_tpl) {?>    <div class="modal-dialog modal-md">
+<?php if ($_valid && !is_callable('content_611494115b88b')) {function content_611494115b88b($_smarty_tpl) {?>    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header contentsBackground">
                 <button aria-hidden="true" class="close " data-dismiss="modal" type="button"><span aria-hidden="true" class='fa fa-close'></span></button>

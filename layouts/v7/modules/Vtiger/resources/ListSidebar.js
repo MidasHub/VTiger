@@ -11,7 +11,7 @@ Vtiger.Class('Vtiger_ListSidebar_Js',{},{
     
     
     registerFilterSeach : function () {
-        var self = this;
+        let self = this;
         var filters = jQuery('#module-filters');
         filters.find('.search-list').on('keyup',function(e){
             var element = jQuery(e.currentTarget);

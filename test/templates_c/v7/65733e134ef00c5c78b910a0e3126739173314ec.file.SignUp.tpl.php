@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2021-07-29 14:26:09
+<?php /* Smarty version Smarty-3.1.7, created on 2021-08-12 03:22:57
          compiled from "/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/SignUp.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1682950936102ba812c5545-20635504%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1167563698611494115a1825-47595501%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '65733e134ef00c5c78b910a0e3126739173314ec' => 
     array (
       0 => '/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/SignUp.tpl',
-      1 => 1627568345,
+      1 => 1628738369,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1682950936102ba812c5545-20635504',
+  'nocache_hash' => '1167563698611494115a1825-47595501',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_6102ba812d415',
+  'unifunc' => 'content_611494115a9ad',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6102ba812d415')) {function content_6102ba812d415($_smarty_tpl) {?><div class="modal-content">
+<?php if ($_valid && !is_callable('content_611494115a9ad')) {function content_611494115a9ad($_smarty_tpl) {?><div class="modal-content">
     <div class="modal-header contentsBackground">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true" class='fa fa-close'></span></button>
         <h4><?php echo vtranslate('LBL_SIGN_UP_TO_VTE_STORE','VTEStore');?>

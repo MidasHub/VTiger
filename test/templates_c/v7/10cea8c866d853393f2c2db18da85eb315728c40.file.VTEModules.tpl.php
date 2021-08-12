@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2021-07-29 14:26:09
+<?php /* Smarty version Smarty-3.1.7, created on 2021-08-12 03:22:57
          compiled from "/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/VTEModules.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:13807031616102ba812304f0-96517246%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1453881546114941152db50-40322856%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '10cea8c866d853393f2c2db18da85eb315728c40' => 
     array (
       0 => '/var/www/html/vtigercrm/includes/runtime/../../layouts/v7/modules/VTEStore/VTEModules.tpl',
-      1 => 1627568345,
+      1 => 1628738369,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '13807031616102ba812304f0-96517246',
+  'nocache_hash' => '1453881546114941152db50-40322856',
   'function' => 
   array (
   ),
@@ -32,9 +32,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_6102ba8127431',
+  'unifunc' => 'content_6114941155b5c',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_6102ba8127431')) {function content_6102ba8127431($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_6114941155b5c')) {function content_6114941155b5c($_smarty_tpl) {?>
 <input type="hidden" name="searchmode" id="searchmode" value="<?php echo $_smarty_tpl->tpl_vars['SEARCHMODE']->value;?>
 "/><input type="hidden" name="search_key" id="search_key" value="<?php echo $_smarty_tpl->tpl_vars['SEARCH_KEY']->value;?>
 "/><div class="row-fluid"><?php if (empty($_smarty_tpl->tpl_vars['STORECATS']->value)){?><table class="emptyRecordsDiv"><tbody><tr><td><?php echo vtranslate('LBL_NO_EXTENSIONS_FOUND','VTEStore');?>

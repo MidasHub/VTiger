@@ -80,7 +80,7 @@ $dbconfigoption['ssl'] = false;
 $host_name = $dbconfig['db_hostname'];
 
 $site_URL = 'https://crm.kiotthe.app/';
-
+#$site_URL = 'https://vtiger.kiotthe.app';
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
 // root directory path
@@ -114,7 +114,7 @@ $allow_exports = 'all';
 $upload_badext = array('php', 'php3', 'php4', 'php5', 'pl', 'cgi', 'py', 'asp', 'cfm', 'js', 'vbs', 'html', 'htm', 'exe', 'bin', 'bat', 'sh', 'dll', 'phps', 'phtml', 'xhtml', 'rb', 'msi', 'jsp', 'shtml', 'sth', 'shtm');
 
 // list_max_entries_per_page default value = 20
-$list_max_entries_per_page = '20';
+$list_max_entries_per_page = '100';
 
 // history_max_viewed default value = 5
 $history_max_viewed = '5';

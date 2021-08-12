@@ -4,3 +4,15 @@
 2021-07-29T06:51:57+01:00 FATAL VT ReceiveIncomingcalls ActionName Added
 2021-07-29T06:51:57+01:00 FATAL VT MakeOutgoingCalls ActionName Added
 2021-07-29T06:51:58+01:00 FATAL VT Successfully added Module Related lists
+2021-08-10T09:38:53+00:00 FATAL VT array (
+  'module' => 'Documents',
+  'view' => 'List',
+)
+2021-08-10T09:38:53+00:00 FATAL VT NULL
+2021-08-10T09:38:53+00:00 FATAL VT Documents_22
+2021-08-10T09:38:53+00:00 FATAL VT array (
+  'module' => 'Documents',
+  'view' => 'List',
+)
+2021-08-10T09:38:53+00:00 FATAL VT NULL
+2021-08-10T09:38:53+00:00 FATAL VT Documents_22

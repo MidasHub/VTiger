@@ -7,4 +7,4 @@
 # All Rights Reserved.
 #
 # ********************************************************************************
-wget http://localhost:APACHEPORT/cron/intimateTaskStatus.php -O intimatelog.txt
+wget https://crm.kiotthe.app/cron/intimateTaskStatus.php -O intimatelog.txt
